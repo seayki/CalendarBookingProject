@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33318.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBooking.Domain", "CalendarBookingDomain\CalendarBooking.Domain.csproj", "{FC0CB320-EC91-4191-969A-FA6B44BD9D00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.Domain", "CalendarBookingDomain\CalendarBooking.Domain.csproj", "{FC0CB320-EC91-4191-969A-FA6B44BD9D00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBooking.Domain.Test", "CalendarBooking.Domain.Test\CalendarBooking.Domain.Test.csproj", "{FD87498A-B5F6-4976-A24A-DB8490E98A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.Domain.Test", "CalendarBooking.Domain.Test\CalendarBooking.Domain.Test.csproj", "{FD87498A-B5F6-4976-A24A-DB8490E98A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBookingAPI", "CalendarBookingAPI\CalendarBookingAPI.csproj", "{B6BE5742-CE15-4EA6-BB60-D6AA3983D329}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.API", "CalendarBookingAPI\CalendarBooking.API.csproj", "{B6BE5742-CE15-4EA6-BB60-D6AA3983D329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBookingWebApp", "CalendarBookingWebApp\CalendarBookingWebApp.csproj", "{B436929D-C7FA-4F8B-8E67-6531A84407E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.App", "CalendarBookingWebApp\CalendarBooking.App.csproj", "{B436929D-C7FA-4F8B-8E67-6531A84407E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarBooking.PersistencyLayer", "CalendarBooking.PersistencyLayer\CalendarBooking.PersistencyLayer.csproj", "{3F7D0078-A2E6-4AE7-8534-18E6B8611B4F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FC0CB320-EC91-4191-969A-FA6B44BD9D00} = {FC0CB320-EC91-4191-969A-FA6B44BD9D00}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +38,10 @@ Global
 		{B436929D-C7FA-4F8B-8E67-6531A84407E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B436929D-C7FA-4F8B-8E67-6531A84407E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B436929D-C7FA-4F8B-8E67-6531A84407E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F7D0078-A2E6-4AE7-8534-18E6B8611B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F7D0078-A2E6-4AE7-8534-18E6B8611B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F7D0078-A2E6-4AE7-8534-18E6B8611B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F7D0078-A2E6-4AE7-8534-18E6B8611B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
