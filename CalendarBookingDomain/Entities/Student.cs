@@ -1,4 +1,4 @@
-﻿namespace CalendarBookingDomain
+﻿namespace CalendarBooking.DomainLayer.Entities
 {
     public class Student
     {

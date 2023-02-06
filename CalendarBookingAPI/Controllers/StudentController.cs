@@ -1,4 +1,6 @@
-﻿using CalendarBooking.API.Services.StudentServices;
+﻿
+using CalendarBooking.ApplicationLayer.Services.StudentServices;
+using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalendarBooking.API.Controllers

@@ -12,8 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalendarBooking.PersistencyLayer\CalendarBooking.PersistencyLayer.csproj" />
-    <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.Domain.csproj" />
+    <ProjectReference Include="..\CalendarBooking.ApplicationLayer\CalendarBooking.ApplicationLayer.csproj" />
+    <ProjectReference Include="..\CalendarBooking.InfrastructureLayer\CalendarBooking.InfrastructureLayer.csproj" />
+    <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.DomainLayer.csproj" />
   </ItemGroup>
 
 </Project>

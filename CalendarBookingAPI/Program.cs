@@ -1,8 +1,7 @@
 
-global using CalendarBookingDomain;
-global using Microsoft.EntityFrameworkCore;
-using CalendarBooking.API.Data;
-using CalendarBooking.API.Services.StudentServices;
+
+using CalendarBooking.ApplicationLayer.Services.StudentServices;
+using CalendarBooking.InfrastructureLayer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

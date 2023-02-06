@@ -1,6 +1,6 @@
-﻿using CalendarBooking.API.Data;
+﻿using CalendarBooking.DomainLayer.Entities;
 
-namespace CalendarBooking.API.Services.StudentServices
+namespace CalendarBooking.ApplicationLayer.Services.StudentServices
 {
     public class StudentService : IStudentService
     {

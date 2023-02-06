@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.Domain.csproj" />
+    <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.DomainLayer.csproj" />
   </ItemGroup>
 
 </Project>

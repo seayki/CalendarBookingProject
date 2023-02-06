@@ -1,6 +1,8 @@
 ﻿
 
-namespace CalendarBooking.API.Services.StudentServices
+using CalendarBooking.DomainLayer.Entities;
+
+namespace CalendarBooking.ApplicationLayer.Services.StudentServices
 {
     public interface IStudentService
     {
