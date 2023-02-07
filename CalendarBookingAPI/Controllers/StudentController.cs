@@ -1,7 +1,9 @@
 ﻿
-using CalendarBooking.ApplicationLayer.Services.StudentServices;
+
+using CalendarBooking.ApplicationLayer.CustomServices.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CalendarBooking.API.Controllers
 {
@@ -9,10 +11,11 @@ namespace CalendarBooking.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class StudentController
+    public class StudentController : ControllerBase
     {
-
+        
         private readonly IStudentService _studentService;
+        
         public StudentController(IStudentService studentService)
         {
             _studentService = studentService;
@@ -21,8 +24,10 @@ namespace CalendarBooking.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAllStudents()
         {
-            return await _studentService.GetAllStudents();
+            return await _studentService.GetAll();
         }
+
+
 
 
     }

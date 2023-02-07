@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\StudentServices\**" />
+    <EmbeddedResource Remove="Services\StudentServices\**" />
+    <None Remove="Services\StudentServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
@@ -19,11 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CalendarBooking.ApplicationLayer\CalendarBooking.ApplicationLayer.csproj" />
     <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.DomainLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\StudentServices\" />
   </ItemGroup>
 
 </Project>

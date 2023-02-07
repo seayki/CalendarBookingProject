@@ -1,6 +1,7 @@
-
-
-using CalendarBooking.ApplicationLayer.Services.StudentServices;
+using CalendarBooking.ApplicationLayer.CustomServices;
+using CalendarBooking.ApplicationLayer.CustomServices.StudentServices;
+using CalendarBooking.DomainLayer.Entities;
+using CalendarBooking.InfrastructureLayer;
 using CalendarBooking.InfrastructureLayer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +13,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<IStudentService, StudentService>();
-
 builder.Services.AddDbContext<DBContext>();
 
 var app = builder.Build();

@@ -8,17 +8,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.DomainLayer.Test", "CalendarBooking.Domain.Test\CalendarBooking.DomainLayer.Test.csproj", "{FD87498A-B5F6-4976-A24A-DB8490E98A11}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.API", "CalendarBookingAPI\CalendarBooking.API.csproj", "{B6BE5742-CE15-4EA6-BB60-D6AA3983D329}"
-	ProjectSection(ProjectDependencies) = postProject
-		{42CBE242-290E-4F6E-A0C1-CB1600696556} = {42CBE242-290E-4F6E-A0C1-CB1600696556}
-		{E3758186-4348-4E83-B57C-EB06700390FA} = {E3758186-4348-4E83-B57C-EB06700390FA}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.ApplicationLayer", "CalendarBooking.ApplicationLayer\CalendarBooking.ApplicationLayer.csproj", "{E3758186-4348-4E83-B57C-EB06700390FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD87498A-B5F6-4976-A24A-DB8490E98A11} = {FD87498A-B5F6-4976-A24A-DB8490E98A11}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.InfrastructureLayer", "CalendarBooking.InfrastructureLayer\CalendarBooking.InfrastructureLayer.csproj", "{42CBE242-290E-4F6E-A0C1-CB1600696556}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E3758186-4348-4E83-B57C-EB06700390FA} = {E3758186-4348-4E83-B57C-EB06700390FA}
-		{FC0CB320-EC91-4191-969A-FA6B44BD9D00} = {FC0CB320-EC91-4191-969A-FA6B44BD9D00}
 	EndProjectSection
 EndProject
 Global
