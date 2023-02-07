@@ -1,5 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.CustomServices;
-using CalendarBooking.ApplicationLayer.CustomServices.StudentServices;
+﻿using CalendarBooking.ApplicationLayer.Services;
+using CalendarBooking.ApplicationLayer.Services.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.InfrastructureLayer.Services
 {
-    public class StudentServices :  IStudentService
+    public class StudentServices : IStudentService
     {
- 
+     
         private readonly DBContext _dbcontext;
         public void Delete(Student entity)
         {
@@ -27,9 +27,10 @@ namespace CalendarBooking.InfrastructureLayer.Services
             _dbcontext.Students.Where(a => a.Id == Id);
         }
 
-        public IEnumerable<Student> GetAll()
+        public async Task<IEnumerable<Student>> GetAll()
         {
-            return _dbcontext.Students.ToList();
+            var result = await _dbcontext.Students.ToListAsync();
+            return result;
         }
 
         public void Insert(Student entity)

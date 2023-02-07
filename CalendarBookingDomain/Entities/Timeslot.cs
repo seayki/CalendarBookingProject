@@ -1,7 +1,11 @@
-﻿namespace CalendarBooking.DomainLayer.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CalendarBooking.DomainLayer.Entities
 {
     public class Timeslot
     {
+        [Key]
+        public int Id { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeStop { get; set; }
         public Calendar Calendar { get; set; } = new Calendar();
@@ -9,9 +13,6 @@
         public Teacher Teacher { get; set; } = new Teacher();
 
 
-        public Timeslot()
-        {
-
-        }
+       
     }
 }

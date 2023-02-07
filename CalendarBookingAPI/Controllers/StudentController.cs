@@ -1,6 +1,7 @@
 ﻿
 
-using CalendarBooking.ApplicationLayer.CustomServices.StudentServices;
+using CalendarBooking.ApplicationLayer.Queries;
+using CalendarBooking.ApplicationLayer.Services.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,22 +14,29 @@ namespace CalendarBooking.API.Controllers
 
     public class StudentController : ControllerBase
     {
-        
-        private readonly IStudentService _studentService;
-        
-        public StudentController(IStudentService studentService)
+        private readonly IStudentQueryService _studentQueryService;
+
+        public StudentController(IStudentQueryService studentQueryService)
         {
-            _studentService = studentService;
+            _studentQueryService = studentQueryService;
+            
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAllStudents()
         {
-            return await _studentService.GetAll();
+
+            
+            var result = await _studentQueryService.GetAll();
+            if (result == null)
+            {
+                return BadRequest("Error Occurred");
+            }
+            return Ok(result);
+
         }
 
 
-
-
     }
+       
 }

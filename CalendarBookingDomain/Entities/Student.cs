@@ -1,9 +1,17 @@
-﻿namespace CalendarBooking.DomainLayer.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CalendarBooking.DomainLayer.Entities
 {
     public class Student
     {
-        public string Name = string.Empty;
+
+        [Key]
         public int Id { get; set; }
+
+        public string? FirstName { get; set; }
+
+        public string? LastName { get; set; }
+
         public List<Booking> Bookings { get; set; } = new();
         public List<Group> Groups { get; set; } = new List<Group>();
         

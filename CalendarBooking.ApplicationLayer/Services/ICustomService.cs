@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalendarBooking.ApplicationLayer.CustomServices
+namespace CalendarBooking.ApplicationLayer.Services
 {
     public interface ICustomService<T>
     {
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
         void FindById(int Id);
         void Insert(T entity);
         Task<T> Update(T entity);
