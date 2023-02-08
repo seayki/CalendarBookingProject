@@ -19,7 +19,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStudentService, StudentServices>();
 builder.Services.AddScoped<IStudentQueryService, StudentQueryService>();
-
 builder.Services.AddDbContext<DBContext>(
     options =>
     options.UseSqlServer(

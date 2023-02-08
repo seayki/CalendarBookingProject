@@ -1,10 +1,9 @@
 ﻿
 
 using CalendarBooking.ApplicationLayer.Queries;
-using CalendarBooking.ApplicationLayer.Services.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace CalendarBooking.API.Controllers
 {
@@ -22,11 +21,14 @@ namespace CalendarBooking.API.Controllers
             
         }
 
+
+
+
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAllStudents()
         {
 
-            
+
             var result = await _studentQueryService.GetAll();
             if (result == null)
             {

@@ -16,6 +16,12 @@ namespace CalendarBooking.InfrastructureLayer.Services
     {
      
         private readonly DBContext _dbcontext;
+
+        public StudentServices(DBContext dbcontext)
+        {
+            _dbcontext = dbcontext;
+        }
+
         public void Delete(Student entity)
         {
             _dbcontext.Students.Remove(entity);
@@ -29,8 +35,9 @@ namespace CalendarBooking.InfrastructureLayer.Services
 
         public async Task<IEnumerable<Student>> GetAll()
         {
-            var result = await _dbcontext.Students.ToListAsync();
-            return result;
+            var students = await _dbcontext.Students.ToListAsync();
+            
+            return students;
         }
 
         public void Insert(Student entity)
