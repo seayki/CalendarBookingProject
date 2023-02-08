@@ -8,6 +8,8 @@ namespace CalendarBooking.DomainLayer.Entities
     {
         [Key]
         public int Id { get; set; }
+
+        public DateTime Time { get; set; }
         public DateTime TimeStart { get; set; } 
         public DateTime TimeStop{ get; set; }
         public Student Student { get; set; } = new Student();

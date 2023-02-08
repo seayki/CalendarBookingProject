@@ -9,7 +9,10 @@ namespace CalendarBooking.DomainLayer.Entities
         [Key]
         public int Id { get; set; }
 
-        public string Name = string.Empty;
+        [Required]
+        public string? Name { get; set; }
+        
+        public int Count { get; set; }
         public List<Student> Students { get; set; } = new ();
         public List<Calendar> Calendars { get; set; } = new();
     }

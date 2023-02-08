@@ -6,6 +6,7 @@ namespace CalendarBooking.DomainLayer.Entities
     {
         [Key]
         public int Id { get; set; }
+        public DateTime SessionLength { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeStop { get; set; }
         public Calendar Calendar { get; set; } = new Calendar();
