@@ -22,15 +22,25 @@ namespace CalendarBooking.InfrastructureLayer.Services
             _dbcontext = dbcontext;
         }
 
-        public void Delete(Student entity)
+        public async Task<IEnumerable<Student?>> Delete(int Id)
         {
-            _dbcontext.Students.Remove(entity);
+            var student = _dbcontext.Students.Find(Id);
+            if (student != null)
+            {
+                _dbcontext.Students.Remove(student);
+            }
             _dbcontext.SaveChanges();
+
+            var students = await _dbcontext.Students.ToListAsync();
+            return students;
         }
 
-        public void FindById(int Id)
+        public async Task<Student?> FindById(int Id)
         {
-            _dbcontext.Students.Where(a => a.Id == Id);
+            var student = await _dbcontext.Students.FindAsync(Id);
+            return student;
+
+
         }
 
         public async Task<IEnumerable<Student>> GetAll()
@@ -46,10 +56,9 @@ namespace CalendarBooking.InfrastructureLayer.Services
             _dbcontext.SaveChanges();
         }
 
-        public async Task<Student> Update(Student entity)
+        public async Task<Student?> UpdateName(int id, string name)
         {
-            Student student = entity;
-            await Task.CompletedTask;
+            _dbcontext.Students.Update(_dbcontext.Students.Find(id));
             return student;
         }
 
@@ -57,5 +66,7 @@ namespace CalendarBooking.InfrastructureLayer.Services
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

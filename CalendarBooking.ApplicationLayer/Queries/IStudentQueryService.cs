@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.ApplicationLayer.Queries
 {
-    public interface IStudentQueryService
+    public interface IStudentQueryService 
     {
-        
+
+        Task<IEnumerable<Student?>> Delete(int id);
         Task<IEnumerable<Student>> GetAll();
+        Task<Student?> FindById(int Id);
+
+
     }
 }
