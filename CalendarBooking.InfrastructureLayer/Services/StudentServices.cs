@@ -28,11 +28,9 @@ namespace CalendarBooking.InfrastructureLayer.Services
             if (student != null)
             {
                 _dbcontext.Students.Remove(student);
+                await _dbcontext.SaveChangesAsync();
             }
-            _dbcontext.SaveChanges();
-
-            var students = await _dbcontext.Students.ToListAsync();
-            return students;
+            return _dbcontext.Students.ToList();
         }
 
         public async Task<Student?> FindById(int Id)
@@ -50,23 +48,42 @@ namespace CalendarBooking.InfrastructureLayer.Services
             return students;
         }
 
-        public void Insert(Student entity)
+        public async Task<Student?> AddStudent(string firstName, string lastName)
         {
-            _dbcontext.Students.Add(entity);
+            var student = new Student() { FirstName = firstName, LastName = lastName };
+            _dbcontext.Students.Add(student);
             _dbcontext.SaveChanges();
+            var result = _dbcontext.Students.Find(student.Id);
+            if (result != null)
+            {
+                return result;
+            }
+            return null;
         }
 
         public async Task<Student?> UpdateName(int id, string name)
         {
-            _dbcontext.Students.Update(_dbcontext.Students.Find(id));
-            return student;
+            var student = await _dbcontext.Students.FindAsync(id);
+            if (student == null)
+            {
+                return null;
+            }
+            student.FirstName = name;
+            await _dbcontext.SaveChangesAsync();
+            return _dbcontext.Students.Find(id);
+           
         }
 
-        public List<Student> GetByAlphabeticalOrder()
+      
+
+        public void Insert(Student obj)
         {
             throw new NotImplementedException();
         }
 
-        
+        public void Update(Student obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace CalendarBooking.DomainLayer.Entities
         [Required]
         public string? LastName { get; set; }
 
+        public string? Email { get; set; }
+
         public List<Booking> Bookings { get; set; } = new();
         public List<Group> Groups { get; set; } = new List<Group>();
         

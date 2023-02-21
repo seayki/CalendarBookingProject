@@ -10,9 +10,11 @@ namespace CalendarBooking.ApplicationLayer.Services
     public interface ICustomService<T>
     {
         Task<IEnumerable<T>> GetAll();
-        Task<Student?> FindById(int Id);
-        void Insert(T entity);
-        Task<T> Update(T entity);
-        Task<IEnumerable<Student?>> Delete(int Id);
+        Task<T?> FindById(int Id);
+        void Insert(T obj);
+        Task<IEnumerable<T?>> Delete(int Id);
+        void Update(T obj);
+        
+
     }
 }

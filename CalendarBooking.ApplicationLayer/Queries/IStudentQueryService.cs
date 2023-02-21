@@ -13,6 +13,9 @@ namespace CalendarBooking.ApplicationLayer.Queries
         Task<IEnumerable<Student?>> Delete(int id);
         Task<IEnumerable<Student>> GetAll();
         Task<Student?> FindById(int Id);
+        Task<Student?> UpdateName(int id, string name);
+        Task<Student?> AddStudent(string firstName, string lastName);
+       
 
 
     }

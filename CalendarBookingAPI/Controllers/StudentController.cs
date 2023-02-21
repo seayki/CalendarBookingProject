@@ -28,8 +28,10 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
+     
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Student?>>> DeleteStudent(int id)
+        public async Task<ActionResult<List<Student>>> DeleteStudent(int id)
         {
             var result = await _studentQueryService.Delete(id);
             if (result == null)
@@ -40,7 +42,7 @@ namespace CalendarBooking.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Student?>> FindById(int id)
+        public async Task<ActionResult<Student>> FindById(int id)
         {
             var result = await _studentQueryService.FindById(id);
             if (result == null)
@@ -50,17 +52,35 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}, {name")]
-        public async Task<ActionResult<Student?>> UpdateName(int id, string name)
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Student>> UpdateName(int id, string name)
         {
             var result = await _studentQueryService.UpdateName(id, name);
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
-       
+
+
+        [HttpPost]
+
+        public async Task<ActionResult<Student>> AddStudent(string firstName, string lastName)
+        {
+            var result = await _studentQueryService.AddStudent(firstName, lastName);
+            if (result == null)
+            {
+                return NotFound("Error Occurred");
+            }
+            return Ok(result);
+        }
+
+
+      
+            
+
+
     }
 
 

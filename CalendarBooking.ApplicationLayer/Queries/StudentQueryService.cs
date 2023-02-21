@@ -37,5 +37,14 @@ namespace CalendarBooking.ApplicationLayer.Queries
         {
             return _studentService.UpdateName(id, name);
         }
+
+
+        public Task<Student?> AddStudent(string firstName, string lastName)
+        {
+            return _studentService.AddStudent(firstName, lastName);
+        }
+
+     
+
     }
 }

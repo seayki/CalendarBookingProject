@@ -10,10 +10,15 @@ namespace CalendarBooking.DomainLayer.Entities
         public int Id { get; set; }
 
         public DateTime Time { get; set; }
-        public DateTime TimeStart { get; set; } 
+        [Required]
+        public DateTime TimeStart { get; set; }
+        [Required]
         public DateTime TimeStop{ get; set; }
+        [Required]
         public Student Student { get; set; } = new Student();
+     
         public Timeslot Timeslot { get; set; } = new Timeslot();
+      
         public Teacher Teacher { get; set; } = new Teacher();
     }
 }
