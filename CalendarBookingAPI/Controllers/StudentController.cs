@@ -60,7 +60,6 @@ namespace CalendarBooking.API.Controllers
         public async Task<ActionResult<Student>> UpdateName(int id, string name)
 =======
         [HttpPost]
-
         public ActionResult Insert(Student entity)
         {            
             _studentCommandService.Insert(entity);
@@ -72,14 +71,14 @@ namespace CalendarBooking.API.Controllers
         public async Task<ActionResult<Student?>> Update(Student entity, int id)
 >>>>>>> ASAS
         {
-            var result = await _studentQueryService.FindById(id);
+            Student student = new Student { FirstName = "Martin", LastName = "Anderson" };
+            var result = await _studentCommandService.Update(student, id);
             if (result is null)
             {
                 return NotFound("Error Occurred");
             }
             result.FirstName = entity.FirstName;
             result.LastName = entity.LastName;
-           
             return Ok(result);
         }
 

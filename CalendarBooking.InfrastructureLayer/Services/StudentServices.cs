@@ -83,9 +83,15 @@ namespace CalendarBooking.InfrastructureLayer.Services
         public async Task<Student> Update(Student entity, int Id)
 >>>>>>> ASAS
         {
-            _dbcontext.Update(entity);
-            _dbcontext.SaveChanges();
+            
             var student = await _dbcontext.Students.FindAsync(Id);
+            if (student != null)
+            {
+                student.FirstName = entity.FirstName;
+                student.LastName = entity.LastName;
+                _dbcontext.SaveChanges();
+            }
+            
             return student;
         }
 <<<<<<< HEAD
