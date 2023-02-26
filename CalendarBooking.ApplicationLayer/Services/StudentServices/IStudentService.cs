@@ -9,9 +9,12 @@ namespace CalendarBooking.ApplicationLayer.Services.StudentServices
 {
     public interface IStudentService : ICustomService<Student>
     {
+<<<<<<< HEAD
       
         Task<Student?> UpdateName(int id, string name);
         Task<Student?> AddStudent(string firstName, string lastName);
+=======
+>>>>>>> ASAS
         
 
     }

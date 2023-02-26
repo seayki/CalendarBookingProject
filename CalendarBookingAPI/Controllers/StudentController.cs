@@ -1,5 +1,6 @@
 ﻿
 
+using CalendarBooking.ApplicationLayer.Commands;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,11 @@ namespace CalendarBooking.API.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentQueryService _studentQueryService;
-        public StudentController(IStudentQueryService studentQueryService)
+        private readonly IStudentCommandService _studentCommandService;
+        public StudentController(IStudentQueryService studentQueryService, IStudentCommandService studentCommandService)
         {
             _studentQueryService = studentQueryService;
+            _studentCommandService = studentCommandService;
         }
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAllStudents()
@@ -33,7 +36,7 @@ namespace CalendarBooking.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Student>>> DeleteStudent(int id)
         {
-            var result = await _studentQueryService.Delete(id);
+            var result = await _studentCommandService.Delete(id);
             if (result == null)
             {
                 return BadRequest("Error Occurred");
@@ -52,18 +55,36 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
+<<<<<<< HEAD
         [HttpPut("{id}")]
         public async Task<ActionResult<Student>> UpdateName(int id, string name)
+=======
+        [HttpPost]
+
+        public ActionResult Insert(Student entity)
+        {            
+            _studentCommandService.Insert(entity);
+            return Ok(entity);
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Student?>> Update(Student entity, int id)
+>>>>>>> ASAS
         {
-            var result = await _studentQueryService.UpdateName(id, name);
-            if (result == null)
+            var result = await _studentQueryService.FindById(id);
+            if (result is null)
             {
                 return NotFound("Error Occurred");
             }
+            result.FirstName = entity.FirstName;
+            result.LastName = entity.LastName;
+           
             return Ok(result);
         }
 
 
+<<<<<<< HEAD
         [HttpPost]
 
         public async Task<ActionResult<Student>> AddStudent(string firstName, string lastName)
@@ -79,6 +100,8 @@ namespace CalendarBooking.API.Controllers
 
       
             
+=======
+>>>>>>> ASAS
 
 
     }

@@ -11,10 +11,10 @@ namespace CalendarBooking.ApplicationLayer.Services
     {
         Task<IEnumerable<T>> GetAll();
         Task<T?> FindById(int Id);
-        void Insert(T obj);
+       
         Task<IEnumerable<T?>> Delete(int Id);
-        void Update(T obj);
-        
-
+       
+        void Insert(T entity);
+        Task<T> Update(T entity, int Id);
     }
 }
