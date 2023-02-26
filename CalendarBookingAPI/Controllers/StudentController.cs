@@ -55,10 +55,7 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
-<<<<<<< HEAD
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Student>> UpdateName(int id, string name)
-=======
+
         [HttpPost]
         public ActionResult Insert(Student entity)
         {            
@@ -69,7 +66,7 @@ namespace CalendarBooking.API.Controllers
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Student?>> Update(Student entity, int id)
->>>>>>> ASAS
+
         {
             Student student = new Student { FirstName = "Martin", LastName = "Anderson" };
             var result = await _studentCommandService.Update(student, id);
@@ -83,7 +80,6 @@ namespace CalendarBooking.API.Controllers
         }
 
 
-<<<<<<< HEAD
         [HttpPost]
 
         public async Task<ActionResult<Student>> AddStudent(string firstName, string lastName)
@@ -98,9 +94,6 @@ namespace CalendarBooking.API.Controllers
 
 
       
-            
-=======
->>>>>>> ASAS
 
 
     }

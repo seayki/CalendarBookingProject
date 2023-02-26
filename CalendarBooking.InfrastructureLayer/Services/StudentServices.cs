@@ -61,7 +61,7 @@ namespace CalendarBooking.InfrastructureLayer.Services
             return null;
         }
 
-<<<<<<< HEAD
+
         public async Task<Student?> UpdateName(int id, string name)
         {
             var student = await _dbcontext.Students.FindAsync(id);
@@ -78,10 +78,14 @@ namespace CalendarBooking.InfrastructureLayer.Services
       
 
         public void Insert(Student obj)
-=======
+        {
+
+
+        }
+
 
         public async Task<Student> Update(Student entity, int Id)
->>>>>>> ASAS
+
         {
             
             var student = await _dbcontext.Students.FindAsync(Id);
@@ -94,13 +98,5 @@ namespace CalendarBooking.InfrastructureLayer.Services
             
             return student;
         }
-<<<<<<< HEAD
-
-        public void Update(Student obj)
-        {
-            throw new NotImplementedException();
-        }
-=======
->>>>>>> ASAS
     }
 }

@@ -21,12 +21,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStudentService, StudentServices>();
 builder.Services.AddScoped<IStudentQueryService, StudentQueryService>();
-<<<<<<< HEAD
+
 builder.Services.AddScoped<ICalendarService, CalendarServices>();
 builder.Services.AddScoped<ICalendarQueryService, CalendarQueryService>();
-=======
 builder.Services.AddScoped<IStudentCommandService, StudentCommandService>();
->>>>>>> ASAS
 builder.Services.AddDbContext<DBContext>(
     options =>
     options.UseSqlServer(

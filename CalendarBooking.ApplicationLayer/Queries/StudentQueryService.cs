@@ -30,7 +30,6 @@ namespace CalendarBooking.ApplicationLayer.Queries
             return _studentService.FindById(id);
         }
 
-<<<<<<< HEAD
         public Task<Student?> UpdateName(int id, string name)
         {
             return _studentService.UpdateName(id, name);
@@ -44,8 +43,6 @@ namespace CalendarBooking.ApplicationLayer.Queries
 
      
 
-=======
-     
->>>>>>> ASAS
+
     }
 }
