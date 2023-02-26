@@ -23,10 +23,7 @@ namespace CalendarBooking.ApplicationLayer.Queries
             return _studentService.GetAll();
         }
 
-        public Task<IEnumerable<Student?>> Delete(int id) 
-        {
-           return _studentService.Delete(id);
-        }
+
 
         public Task<Student?> FindById(int id)
         {
@@ -45,6 +42,7 @@ namespace CalendarBooking.ApplicationLayer.Queries
         }
 
      
+
 
     }
 }

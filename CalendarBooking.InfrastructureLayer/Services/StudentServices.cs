@@ -61,6 +61,7 @@ namespace CalendarBooking.InfrastructureLayer.Services
             return null;
         }
 
+
         public async Task<Student?> UpdateName(int id, string name)
         {
             var student = await _dbcontext.Students.FindAsync(id);
@@ -78,12 +79,24 @@ namespace CalendarBooking.InfrastructureLayer.Services
 
         public void Insert(Student obj)
         {
-            throw new NotImplementedException();
+
+
         }
 
-        public void Update(Student obj)
+
+        public async Task<Student> Update(Student entity, int Id)
+
         {
-            throw new NotImplementedException();
+            
+            var student = await _dbcontext.Students.FindAsync(Id);
+            if (student != null)
+            {
+                student.FirstName = entity.FirstName;
+                student.LastName = entity.LastName;
+                _dbcontext.SaveChanges();
+            }
+            
+            return student;
         }
     }
 }

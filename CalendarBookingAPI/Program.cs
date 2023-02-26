@@ -1,3 +1,4 @@
+using CalendarBooking.ApplicationLayer.Commands;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.ApplicationLayer.Services;
 using CalendarBooking.ApplicationLayer.Services.CalendarServices;
@@ -20,8 +21,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStudentService, StudentServices>();
 builder.Services.AddScoped<IStudentQueryService, StudentQueryService>();
+
 builder.Services.AddScoped<ICalendarService, CalendarServices>();
 builder.Services.AddScoped<ICalendarQueryService, CalendarQueryService>();
+builder.Services.AddScoped<IStudentCommandService, StudentCommandService>();
 builder.Services.AddDbContext<DBContext>(
     options =>
     options.UseSqlServer(
