@@ -16,8 +16,4 @@
     <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.DomainLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\DTO\" />
-  </ItemGroup>
-
 </Project>
