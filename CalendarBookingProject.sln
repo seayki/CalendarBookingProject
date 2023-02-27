@@ -19,14 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.Infrastruct
 		{E3758186-4348-4E83-B57C-EB06700390FA} = {E3758186-4348-4E83-B57C-EB06700390FA}
 	EndProjectSection
 EndProject
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.BlazorApp.Client", "CalendarBooking.BlazorApp\Client\CalendarBooking.BlazorApp.Client.csproj", "{2E1A088E-9DDF-411D-AA15-C5AE3E5D152F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseMigrations", "DatabaseMigrations\DatabaseMigrations.csproj", "{EB5221A0-EB66-4E3D-BA36-F58E55F72972}"
 EndProject
-=======
->>>>>>> ASAS
->>>>>>> 9e7e609cfb3290aa8f21e7356538b7d4962c83fd
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,16 +47,10 @@ Global
 		{42CBE242-290E-4F6E-A0C1-CB1600696556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42CBE242-290E-4F6E-A0C1-CB1600696556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42CBE242-290E-4F6E-A0C1-CB1600696556}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-		{2E1A088E-9DDF-411D-AA15-C5AE3E5D152F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E1A088E-9DDF-411D-AA15-C5AE3E5D152F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E1A088E-9DDF-411D-AA15-C5AE3E5D152F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E1A088E-9DDF-411D-AA15-C5AE3E5D152F}.Release|Any CPU.Build.0 = Release|Any CPU
-=======
->>>>>>> ASAS
->>>>>>> 9e7e609cfb3290aa8f21e7356538b7d4962c83fd
+		{EB5221A0-EB66-4E3D-BA36-F58E55F72972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5221A0-EB66-4E3D-BA36-F58E55F72972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5221A0-EB66-4E3D-BA36-F58E55F72972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5221A0-EB66-4E3D-BA36-F58E55F72972}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

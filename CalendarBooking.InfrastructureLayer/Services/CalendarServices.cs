@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.Services.CalendarServices;
+﻿using CalendarBooking.ApplicationLayer.Services;
+using CalendarBooking.ApplicationLayer.Services.CalendarServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -37,14 +38,16 @@ namespace CalendarBooking.InfrastructureLayer.Services
             return calendars;
         }
 
-        public void Insert(Calendar obj)
+        public Task Insert(Calendar obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Calendar obj)
+        public Task<Calendar> Update(Calendar obj, int id)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalendarBooking.API.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20230207112105_1.3")]
-    partial class _13
+    [Migration("20230226174635_2")]
+    partial class _2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,14 @@ namespace CalendarBooking.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("StudentIDId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("TimeStart")
                         .HasColumnType("datetime2");
@@ -50,7 +53,7 @@ namespace CalendarBooking.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentIDId");
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("TeacherId");
 
@@ -85,6 +88,13 @@ namespace CalendarBooking.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Groups");
@@ -98,6 +108,17 @@ namespace CalendarBooking.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Students");
@@ -110,6 +131,14 @@ namespace CalendarBooking.API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -126,6 +155,9 @@ namespace CalendarBooking.API.Migrations
 
                     b.Property<int>("CalendarId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("SessionLength")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("TeacherId")
                         .HasColumnType("int");
@@ -177,9 +209,9 @@ namespace CalendarBooking.API.Migrations
 
             modelBuilder.Entity("CalendarBooking.DomainLayer.Entities.Booking", b =>
                 {
-                    b.HasOne("CalendarBooking.DomainLayer.Entities.Student", "StudentID")
+                    b.HasOne("CalendarBooking.DomainLayer.Entities.Student", "Student")
                         .WithMany("Bookings")
-                        .HasForeignKey("StudentIDId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -195,7 +227,7 @@ namespace CalendarBooking.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("StudentID");
+                    b.Navigation("Student");
 
                     b.Navigation("Teacher");
 

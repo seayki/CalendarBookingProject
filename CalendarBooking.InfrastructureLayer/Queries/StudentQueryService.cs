@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.Services.StudentServices;
+﻿using CalendarBooking.ApplicationLayer.Queries;
+using CalendarBooking.ApplicationLayer.Services.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalendarBooking.ApplicationLayer.Queries
+namespace CalendarBooking.InfrastructureLayer.Queries
 {
     public class StudentQueryService : IStudentQueryService
     {
@@ -18,7 +19,7 @@ namespace CalendarBooking.ApplicationLayer.Queries
         }
 
 
-        public Task<IEnumerable<Student>>GetAll()
+        public Task<IEnumerable<Student>> GetAll()
         {
             return _studentService.GetAll();
         }
@@ -30,19 +31,9 @@ namespace CalendarBooking.ApplicationLayer.Queries
             return _studentService.FindById(id);
         }
 
-        public Task<Student?> UpdateName(int id, string name)
+        public Task<IEnumerable<Booking>> GetBookings(int studentID)
         {
-            return _studentService.UpdateName(id, name);
+            return _studentService.GetBookings(studentID);
         }
-
-
-        public Task<Student?> AddStudent(string firstName, string lastName)
-        {
-            return _studentService.AddStudent(firstName, lastName);
-        }
-
-     
-
-
     }
 }

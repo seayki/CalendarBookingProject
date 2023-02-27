@@ -77,10 +77,10 @@ namespace CalendarBooking.InfrastructureLayer.Services
 
       
 
-        public void Insert(Student obj)
+        public async Task Insert(Student obj)
         {
-
-
+         _dbcontext.Students.Add(obj);
+        await _dbcontext.SaveChangesAsync();
         }
 
 
@@ -98,5 +98,16 @@ namespace CalendarBooking.InfrastructureLayer.Services
             
             return student;
         }
+
+
+         
+
+
+        public async Task<IEnumerable<Booking>> GetBookings(int studentID)
+        {
+            var studentBookings = await _dbcontext.Bookings.Where(b => b.Student.Id == studentID).ToListAsync();
+            return studentBookings;
+        }
+
     }
 }

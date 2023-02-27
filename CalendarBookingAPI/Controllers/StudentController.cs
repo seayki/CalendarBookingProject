@@ -55,21 +55,22 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
+        // Crasher Swagger ?
+        //[HttpPost]
+        //public Task Insert(Student entity)
+        //{            
+        //    _studentCommandService.Insert(entity);
+        //    return Task.CompletedTask;
 
-        [HttpPost]
-        public ActionResult Insert(Student entity)
-        {            
-            _studentCommandService.Insert(entity);
-            return Ok(entity);
-        }
+
+        //}
 
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Student?>> Update(Student entity, int id)
 
         {
-            Student student = new Student { FirstName = "Martin", LastName = "Anderson" };
-            var result = await _studentCommandService.Update(student, id);
+            var result = await _studentCommandService.Update(entity, id);
             if (result is null)
             {
                 return NotFound("Error Occurred");
@@ -81,10 +82,9 @@ namespace CalendarBooking.API.Controllers
 
 
         [HttpPost]
-
         public async Task<ActionResult<Student>> AddStudent(string firstName, string lastName)
         {
-            var result = await _studentQueryService.AddStudent(firstName, lastName);
+            var result = await _studentCommandService.AddStudent(firstName, lastName);
             if (result == null)
             {
                 return NotFound("Error Occurred");

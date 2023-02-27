@@ -13,8 +13,8 @@ namespace CalendarBooking.ApplicationLayer.Services.StudentServices
       
         Task<Student?> UpdateName(int id, string name);
         Task<Student?> AddStudent(string firstName, string lastName);
+        Task<IEnumerable<Booking>> GetBookings(int studentID);
 
-        
 
     }
 }

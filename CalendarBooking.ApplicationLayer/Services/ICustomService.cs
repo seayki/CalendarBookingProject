@@ -14,7 +14,8 @@ namespace CalendarBooking.ApplicationLayer.Services
        
         Task<IEnumerable<T?>> Delete(int Id);
        
-        void Insert(T entity);
+        Task Insert(T entity);
+
         Task<T> Update(T entity, int Id);
     }
 }
