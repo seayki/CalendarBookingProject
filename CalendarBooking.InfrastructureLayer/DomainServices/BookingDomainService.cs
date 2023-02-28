@@ -25,9 +25,9 @@ namespace CalendarBooking.InfrastructureLayer.DomainServices
            
             foreach (var Booking in studentBookings)
             {
-                if (booking.TimeStart < booking.TimeStop && booking.TimeStop > booking.TimeStart)
+                if (booking.TimeStart < Booking.TimeStop && booking.TimeStart > Booking.TimeStart || booking.TimeStop > Booking.TimeStart && booking.TimeStop < Booking.TimeStop)
                 {
-                    
+
                     return true;
                 }
             }

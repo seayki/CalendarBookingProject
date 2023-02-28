@@ -30,7 +30,6 @@ builder.Services.AddDbContext<DBContext>(
     options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CalendarBookingProjectDatabase"),
             db => db.MigrationsAssembly("CalendarBookingProject.DatabaseMigrations"))) ;
-
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(StudentBookingQuery)));
 
 var app = builder.Build();

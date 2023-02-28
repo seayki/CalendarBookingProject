@@ -1,11 +1,14 @@
 ﻿
 
+using CalendarBooking.DomainLayer.DomainServices;
 using System.ComponentModel.DataAnnotations;
 
 namespace CalendarBooking.DomainLayer.Entities
 {
     public class Booking
     {
+        private readonly IBookingDomainService _bookingDomainService;
+
         [Key]
         public int Id { get; set; }
 
@@ -20,5 +23,14 @@ namespace CalendarBooking.DomainLayer.Entities
         public Timeslot Timeslot { get; set; } = new Timeslot();
       
         public Teacher Teacher { get; set; } = new Teacher();
+
+        public Booking(IBookingDomainService bookingDomainService)
+        {
+            _bookingDomainService = bookingDomainService;
+        }
+
+        public bool IsBookingOverlapping(int id, Booking booking) {
+            _bookingDomainService.IsBookingOverlapping(id, booking);
+        }
     }
 }

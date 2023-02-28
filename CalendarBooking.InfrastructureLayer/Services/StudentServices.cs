@@ -53,7 +53,7 @@ namespace CalendarBooking.InfrastructureLayer.Services
             var student = new Student() { FirstName = firstName, LastName = lastName };
             _dbcontext.Students.Add(student);
             _dbcontext.SaveChanges();
-            var result = _dbcontext.Students.Find(student.Id);
+            var result = await _dbcontext.Students.FindAsync(student.Id);
             if (result != null)
             {
                 return result;
