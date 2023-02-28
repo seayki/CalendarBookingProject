@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CalendarBooking.ApplicationLayer.Queries;
+using CalendarBooking.ApplicationLayer.Queries.DTO;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using System;
