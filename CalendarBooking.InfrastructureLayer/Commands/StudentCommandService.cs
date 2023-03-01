@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.Services;
+﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.Services;
 using CalendarBooking.ApplicationLayer.Services.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
@@ -12,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.InfrastructureLayer.Services
 {
-    public class StudentServices : IStudentService
+    public class StudentCommandService : IStudentCommandService
     {
      
         private readonly DBContext _dbcontext;
 
-        public StudentServices(DBContext dbcontext)
+        public StudentCommandService(DBContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
@@ -33,21 +34,9 @@ namespace CalendarBooking.InfrastructureLayer.Services
             return _dbcontext.Students.ToList();
         }
 
-        public async Task<Student?> FindById(int Id)
-        {
-            var student = await _dbcontext.Students.FindAsync(Id);
-            return student;
+  
 
-
-        }
-
-        public async Task<IEnumerable<Student>> GetAll()
-        {
-            var students = await _dbcontext.Students.ToListAsync();
-            
-            return students;
-        }
-
+  
         public async Task<Student?> AddStudent(string firstName, string lastName)
         {
             var student = new Student() { FirstName = firstName, LastName = lastName };
@@ -77,14 +66,14 @@ namespace CalendarBooking.InfrastructureLayer.Services
 
       
 
-        public async Task Insert(Student obj)
+        public async Task Insert(Student entity)
         {
-         _dbcontext.Students.Add(obj);
-        await _dbcontext.SaveChangesAsync();
+             _dbcontext.Students.Add(entity);
+            await _dbcontext.SaveChangesAsync();
         }
 
 
-        public async Task<Student> Update(Student entity, int Id)
+        public async Task<Student?> Update(Student entity, int Id)
 
         {
             
@@ -94,21 +83,12 @@ namespace CalendarBooking.InfrastructureLayer.Services
                 student.FirstName = entity.FirstName;
                 student.LastName = entity.LastName;
                 _dbcontext.SaveChanges();
+                return student;
             }
-            
-            return student;
+
+            return null;
         }
 
-
-         
-
-
-        public async Task<IEnumerable<Booking>> GetBookings(int studentID)
-        {
-            var studentBookings = await _dbcontext.Bookings.Where(b => b.Student.Id == studentID).ToListAsync();
-            return studentBookings;
-        }
-
-     
+      
     }
 }

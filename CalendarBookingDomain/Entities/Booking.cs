@@ -31,6 +31,7 @@ namespace CalendarBooking.DomainLayer.Entities
 
         public bool IsBookingOverlapping(int id, Booking booking) {
             _bookingDomainService.IsBookingOverlapping(id, booking);
+            return true;
         }
     }
 }

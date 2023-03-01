@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\StudentServices\**" />
-    <EmbeddedResource Remove="Services\StudentServices\**" />
-    <None Remove="Services\StudentServices\**" />
+    <Compile Remove="Commands\StudentServices\**" />
+    <EmbeddedResource Remove="Commands\StudentServices\**" />
+    <None Remove="Commands\StudentServices\**" />
   </ItemGroup>
 
   <ItemGroup>
