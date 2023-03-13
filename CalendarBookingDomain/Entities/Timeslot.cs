@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CalendarBooking.DomainLayer.DomainServices;
+using System.ComponentModel.DataAnnotations;
 
 namespace CalendarBooking.DomainLayer.Entities
 {
     public class Timeslot : EntitySuperclass
     {
+        private readonly _timeslotDomainService
         public DateTime TimeSlotLength { get; set; }
         [Required]
         public DateTime TimeStart { get; set; }
@@ -15,9 +17,17 @@ namespace CalendarBooking.DomainLayer.Entities
         [Required]
         public Teacher Teacher { get; set; } = new Teacher();
 
-        public Timeslot()
+        public Timeslot(ITimeslotDomainService timeslotDomainService)
         {
             
+        }
+
+
+        public Timeslot()
+        {
+            public bool IsTimeslotOverlapping(Booking booking) {
+                return _timeslotDomainService.IsTimeslotOverlapping(this.Id, booking);
+            }
         }
 
     }
