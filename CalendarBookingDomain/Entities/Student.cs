@@ -14,7 +14,11 @@ namespace CalendarBooking.DomainLayer.Entities
 
         public List<Booking> Bookings { get; set; } = new();
         public List<Group> Groups { get; set; } = new List<Group>();
-        
+
+        public Student()
+        {
+            
+        }
 
     }
 

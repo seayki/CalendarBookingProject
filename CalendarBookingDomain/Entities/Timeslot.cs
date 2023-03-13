@@ -13,9 +13,12 @@ namespace CalendarBooking.DomainLayer.Entities
         public Calendar Calendar { get; set; } = new Calendar();
         public List<Booking> Bookings { get; set; } = new List<Booking>();
         [Required]
-        public Teacher Teacher { get; set; } = new Teacher(); 
+        public Teacher Teacher { get; set; } = new Teacher();
 
-
+        public Timeslot()
+        {
+            
+        }
 
     }
 }
