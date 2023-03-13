@@ -1,8 +1,6 @@
 using CalendarBooking.ApplicationLayer.Commands;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.ApplicationLayer.Services;
-
-using CalendarBooking.ApplicationLayer.Services.StudentServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using CalendarBooking.InfrastructureLayer.Queries;

@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CalendarBooking.DomainLayer.Entities
 {
-    public class Group
+    public class Group : EntitySuperclass
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string? Name { get; set; }
         

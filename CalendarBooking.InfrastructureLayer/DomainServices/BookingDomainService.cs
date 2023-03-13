@@ -19,13 +19,16 @@ namespace CalendarBooking.InfrastructureLayer.DomainServices
         }
         public bool IsBookingOverlapping(int id, Booking booking)
         {
-           
-            var studentBookings = _dbContext.Bookings.Where(b => b.Id == id);
 
+            var studentBookings = _dbContext.Bookings.Where(b => b.Id == id);
+            if (studentBookings.Count() >= 2) {
+                return false;
+            }
+            
            
             foreach (var Booking in studentBookings)
             {
-                if (booking.TimeStart < Booking.TimeStop && booking.TimeStart > Booking.TimeStart || booking.TimeStop > Booking.TimeStart && booking.TimeStop < Booking.TimeStop)
+                if (booking.TimeStart < Booking.TimeEnd && booking.TimeStart > Booking.TimeStart || booking.TimeEnd > Booking.TimeStart && booking.TimeEnd < Booking.TimeEnd)
                 {
 
                     return true;

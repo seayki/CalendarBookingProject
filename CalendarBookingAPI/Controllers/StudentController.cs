@@ -55,29 +55,15 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
-        // Crasher Swagger ?
-        //[HttpPost]
-        //public Task Insert(Student entity)
-        //{            
-        //    _studentCommandService.Insert(entity);
-        //    return Task.CompletedTask;
-
-
-        //}
-
+  
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Student?>> Update(Student entity, int id)
 
         {
-            var result = await _studentCommandService.Update(entity, id);
-            if (result is null)
-            {
-                return NotFound("Error Occurred");
-            }
-            result.FirstName = entity.FirstName;
-            result.LastName = entity.LastName;
-            return Ok(result);
+            await _studentCommandService.Update(entity, id);
+         
+            return Ok();
         }
 
 

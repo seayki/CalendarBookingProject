@@ -12,11 +12,11 @@ namespace CalendarBooking.ApplicationLayer.Commands
 
         Task<IEnumerable<Student?>> Delete(int id);
 
-        Task<Student> Update(Student entity, int Id);
+        Task Update(Student entity, int Id);
 
         Task Insert(Student entity);
 
-        Task<Student?> UpdateName(int id, string name);
+        Task UpdateName(int id, string name);
 
         Task<Student?> AddStudent(string firstName, string lastName);
 

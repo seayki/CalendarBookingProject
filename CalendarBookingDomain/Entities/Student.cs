@@ -2,12 +2,8 @@
 
 namespace CalendarBooking.DomainLayer.Entities
 {
-    public class Student
+    public class Student : EntitySuperclass
     {
-
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string? FirstName { get; set; }
 
