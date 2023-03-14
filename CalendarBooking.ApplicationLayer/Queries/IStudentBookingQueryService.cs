@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.ApplicationLayer.Queries
 {
-    public interface IStudentBookingQuery
+    public interface IStudentBookingQueryService
     {
         StudentBookingQueryResultDTO GetBookings(int studentID);
 

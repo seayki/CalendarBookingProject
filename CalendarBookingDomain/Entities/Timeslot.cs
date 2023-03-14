@@ -5,30 +5,43 @@ namespace CalendarBooking.DomainLayer.Entities
 {
     public class Timeslot : EntitySuperclass
     {
-        private readonly _timeslotDomainService
+        private readonly ITimeslotDomainService _timeslotDomainService;
         public DateTime TimeSlotLength { get; set; }
         [Required]
         public DateTime TimeStart { get; set; }
         [Required]
-        public DateTime TimeStop { get; set; }
+        public DateTime TimeEnd { get; set; }
         [Required]
         public Calendar Calendar { get; set; } = new Calendar();
         public List<Booking> Bookings { get; set; } = new List<Booking>();
         [Required]
         public Teacher Teacher { get; set; } = new Teacher();
 
-        public Timeslot(ITimeslotDomainService timeslotDomainService)
+        public Timeslot(ITimeslotDomainService timeslotDomainService, DateTime timeStart, DateTime timeEnd, Teacher teacher)
         {
-            
+            _timeslotDomainService = timeslotDomainService;
+            TimeStart = timeStart;
+            TimeEnd = timeEnd;
+            Teacher = teacher;
+            ValidateTimeslot();
         }
 
 
         public Timeslot()
         {
-            public bool IsTimeslotOverlapping(Booking booking) {
-                return _timeslotDomainService.IsTimeslotOverlapping(this.Id, booking);
+          
+        }
+
+        private void ValidateTimeslot()
+        {
+            
+            if (_timeslotDomainService.IsTimeslotOverlapping(Teacher.Id, this))
+            {
+                throw new Exception("Booking is overlapping exsisting bookings");
             }
         }
+
+      
 
     }
 }

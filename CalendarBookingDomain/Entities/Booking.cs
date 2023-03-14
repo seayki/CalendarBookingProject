@@ -27,13 +27,33 @@ namespace CalendarBooking.DomainLayer.Entities
 
         }
 
-        public Booking(IBookingDomainService bookingDomainService)
+        public Booking(IBookingDomainService bookingDomainService,DateTime timeStart, DateTime timeEnd, Student student)
         {
             _bookingDomainService = bookingDomainService;
+            TimeStart = timeStart;
+            TimeEnd = timeEnd;
+            Student = student;
+            ValidateBooking();
         }
+        private void ValidateBooking()
+        {
+            ValidateIsSetAndInFuture(nameof(TimeStart), TimeStart);
+            ValidateIsSetAndInFuture(nameof(TimeEnd), TimeEnd);
+            if (_bookingDomainService.CheckBookingCount(this))
+            {
+                throw new Exception("Max bookings of two");
+            }
+            if (_bookingDomainService.IsBookingOverlapping(this))
+            {
+                throw new Exception("Booking is overlapping exsisting bookings");
+            }
 
-        public bool IsBookingOverlapping(Booking booking) {
-            return _bookingDomainService.IsBookingOverlapping(this.Id, booking);
+
+        }
+        private void ValidateIsSetAndInFuture(string parameter, DateTime date)
+        {
+            if (date == default) throw new ArgumentException($"{parameter} is not set");
+            if (date <= DateTime.Now) throw new ArgumentException($"{parameter} must be in the future");
         }
     }
 }

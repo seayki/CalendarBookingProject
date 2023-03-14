@@ -36,7 +36,7 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             BeginTransaction(IsolationLevel.Serializable);
             try
             {
-                var Booking = new Booking
+                var Booking = new Booking()
                 {
                     Student = student,
                     TimeStart = timeStart,

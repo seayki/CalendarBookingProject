@@ -15,6 +15,7 @@ namespace CalendarBooking.API.Controllers
     {
         private readonly IStudentQueryService _studentQueryService;
         private readonly IStudentCommandService _studentCommandService;
+
         public StudentController(IStudentQueryService studentQueryService, IStudentCommandService studentCommandService)
         {
             _studentQueryService = studentQueryService;

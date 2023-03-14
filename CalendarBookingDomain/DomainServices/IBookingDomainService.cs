@@ -9,6 +9,8 @@ namespace CalendarBooking.DomainLayer.DomainServices
 {
     public interface IBookingDomainService
     {
-        public bool IsBookingOverlapping(int id, Booking booking);
+        public bool IsBookingOverlapping(Booking booking);
+
+        public bool CheckBookingCount(Booking booking);
     }
 }

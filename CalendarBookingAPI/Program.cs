@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IStudentQueryService, StudentQueryService>();
 builder.Services.AddScoped<IStudentCommandService, StudentCommandService>();
-builder.Services.AddScoped<IStudentBookingQuery, StudentBookingQuery>();
+builder.Services.AddScoped<IStudentBookingQueryService, StudentBookingQuery>();
 builder.Services.AddDbContext<DBContext>(
     options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CalendarBookingProjectDatabase"),

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.InfrastructureLayer.Queries
 {
-    public class StudentBookingQuery : IStudentBookingQuery
+    public class StudentBookingQuery : IStudentBookingQueryService
     {
 
 
@@ -24,7 +24,7 @@ namespace CalendarBooking.InfrastructureLayer.Queries
             _mapper = mapper;
         }
 
-        StudentBookingQueryResultDTO IStudentBookingQuery.GetBookings(int studentID)
+        StudentBookingQueryResultDTO IStudentBookingQueryService.GetBookings(int studentID)
         {
             var dbResult = _dbContext.Bookings.Where(b => b.Student.Id == studentID).ToList();
             if (dbResult is null)
