@@ -18,36 +18,34 @@ namespace CalendarBooking.InfrastructureLayer.DomainServices
             _dbContext = dbContext;
         }
         public bool IsBookingOverlapping(Booking booking)
-        {
-
-            if (booking.Student.Bookings.Count >= 2)
-            {
-                return false;
-            }
-            
+        {                
            foreach (var Booking in booking.Student.Bookings) 
            {
-                if (booking.TimeStart < Booking.TimeEnd && booking.TimeStart > Booking.TimeStart || booking.TimeEnd > Booking.TimeStart && booking.TimeEnd < Booking.TimeEnd)
-                {
 
-                    return true;
+                if (Booking.TimeEnd >= DateTime.Now) {
+                    if (booking.TimeStart < Booking.TimeEnd && booking.TimeStart > Booking.TimeStart || booking.TimeEnd > Booking.TimeStart && booking.TimeEnd < Booking.TimeEnd) {
+                        return true;
+                    }
                 }
            }
-           return false;
-            
-
-
+           return false;     
             
         }
-
-        public bool CheckBookingCount(Booking booking)
+        public bool IsBookingLimitReached(Booking booking)
         {
-            if (booking.Student.Bookings.Count >= 2)
+            int count = 0;
+            foreach (var Booking in  booking.Student.Bookings) 
+            { 
+                if (Booking.TimeEnd >= DateTime.Now) 
+                {
+                    count++;
+                }
+            }
+            if (count == 2)
             {
                 return false;
             }
+            return true;
         }
-
-        
     }
 }

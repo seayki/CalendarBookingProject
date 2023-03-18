@@ -22,6 +22,8 @@
     <ProjectReference Include="..\CalendarBooking.ApplicationLayer\CalendarBooking.ApplicationLayer.csproj" />
     <ProjectReference Include="..\CalendarBooking.InfrastructureLayer\CalendarBooking.InfrastructureLayer.csproj" />
     <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.DomainLayer.csproj" />
+	 <ProjectReference Include="..\CalendarBookingDomain\CalendarBooking.DomainLayer.csproj" />
+	  <ProjectReference Include="..\CalendarBookingProject.DatabaseMigrations\CalendarBookingProject.DatabaseMigrations.csproj"/>
   </ItemGroup>
 
 </Project>

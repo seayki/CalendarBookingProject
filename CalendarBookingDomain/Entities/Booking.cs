@@ -39,13 +39,13 @@ namespace CalendarBooking.DomainLayer.Entities
         {
             ValidateIsSetAndInFuture(nameof(TimeStart), TimeStart);
             ValidateIsSetAndInFuture(nameof(TimeEnd), TimeEnd);
-            if (_bookingDomainService.CheckBookingCount(this))
+            if (_bookingDomainService.IsBookingLimitReached(this))
             {
-                throw new Exception("Max bookings of two");
+                throw new Exception("You can only have two active bookings");
             }
             if (_bookingDomainService.IsBookingOverlapping(this))
             {
-                throw new Exception("Booking is overlapping exsisting bookings");
+                throw new Exception("Booking is overlapping with existing bookings");
             }
 
 

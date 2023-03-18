@@ -11,8 +11,6 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,9 +22,7 @@ builder.Services.AddDbContext<DBContext>(
     options.UseSqlServer(builder.Configuration.GetConnectionString("CalendarBookingProjectDatabase"),
             db => db.MigrationsAssembly("CalendarBookingProject.DatabaseMigrations"))) ;
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(StudentBookingQuery)));
-
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

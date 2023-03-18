@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.DomainLayer.DomainServices {
     public interface ITimeslotDomainService {
-        public bool IsTimeslotOverlapping(int id, Timeslot timeslot);
+        public bool IsTimeslotOverlapping(Timeslot timeslot);
     }
 }

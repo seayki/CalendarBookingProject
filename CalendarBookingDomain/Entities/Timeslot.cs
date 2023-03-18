@@ -35,9 +35,9 @@ namespace CalendarBooking.DomainLayer.Entities
         private void ValidateTimeslot()
         {
             
-            if (_timeslotDomainService.IsTimeslotOverlapping(Teacher.Id, this))
+            if (_timeslotDomainService.IsTimeslotOverlapping(this))
             {
-                throw new Exception("Booking is overlapping exsisting bookings");
+                throw new Exception("Timeslot overlaps with one or more existing timeslots.");
             }
         }
 

@@ -18,7 +18,7 @@ namespace CalendarBooking.InfrastructureLayer.DomainServices
             _dBContext = dBContext;
         }
 
-        public bool IsTimeslotOverlapping(int id, Timeslot timeslot)
+        public bool IsTimeslotOverlapping(Timeslot timeslot)
         {
             throw new NotImplementedException();
         }

@@ -10,6 +10,7 @@ namespace CalendarBooking.ApplicationLayer.Services
     public interface ICustomService<T>
     {
         Task<IEnumerable<T>> GetAll();
+
         Task<T?> FindById(int Id);
        
         Task<IEnumerable<T?>> Delete(int Id);

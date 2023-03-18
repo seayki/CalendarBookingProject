@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.DomainLayer.Entities
 {
-    public abstract class EntitySuperclass
+    public class EntitySuperclass
     {
         public int Id { get; set; }
 
         [Timestamp]
-        public byte[]? Version { get; set; }
+        public byte[] Version { get; set; }
     }
 }
