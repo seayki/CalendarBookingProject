@@ -1,7 +1,4 @@
-﻿using CalendarBooking.ApplicationLayer.Commands;
-using CalendarBooking.ApplicationLayer.Services;
-using CalendarBooking.DomainLayer.Entities;
-using CalendarBooking.InfrastructureLayer.Data;
+﻿using CalendarBooking.DomainLayer.Entities;
 using Castle.Core.Resource;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
