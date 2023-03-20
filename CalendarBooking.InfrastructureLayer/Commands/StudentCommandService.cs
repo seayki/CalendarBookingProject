@@ -1,22 +1,14 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
-using CalendarBooking.ApplicationLayer.Services;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
-using Castle.Core.Resource;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CalendarBooking.InfrastructureLayer.Services
+namespace CalendarBooking.InfrastructureLayer.Commands
 {
     public class StudentCommandService : IStudentCommandService
     {
-     
+
         private readonly DBContext _dbcontext;
 
         public StudentCommandService(DBContext dbcontext)
@@ -35,9 +27,9 @@ namespace CalendarBooking.InfrastructureLayer.Services
             return _dbcontext.Students.ToList();
         }
 
-  
 
-  
+
+
         public async Task<Student?> AddStudent(string firstName, string lastName)
         {
             var student = new Student() { FirstName = firstName, LastName = lastName };
@@ -60,22 +52,22 @@ namespace CalendarBooking.InfrastructureLayer.Services
                 student.FirstName = name;
                 await _dbcontext.SaveChangesAsync();
             }
-        
-           
-           
+
+
+
         }
 
 
         public async Task Insert(Student entity)
         {
-             _dbcontext.Students.Add(entity);
+            _dbcontext.Students.Add(entity);
             await _dbcontext.SaveChangesAsync();
         }
 
 
         public async Task Update(Student entity, int Id)
         {
-            
+
             using var transaction = _dbcontext.Database.
             BeginTransaction(IsolationLevel.Serializable);
             try
@@ -90,7 +82,7 @@ namespace CalendarBooking.InfrastructureLayer.Services
                     student.Email = entity.Email;
                     _dbcontext.SaveChanges();
                     await transaction.CommitAsync();
-                   
+
                 }
             }
 
@@ -101,7 +93,7 @@ namespace CalendarBooking.InfrastructureLayer.Services
                 var entry = ex.Entries.Single();
                 var clientValues = (Student)entry.Entity;
                 var databaseValues = (Student)entry.GetDatabaseValues().ToObject();
-               
+
 
                 // Check if the row version values match, if not, throw an exception
                 if (clientValues.Version != databaseValues.Version)

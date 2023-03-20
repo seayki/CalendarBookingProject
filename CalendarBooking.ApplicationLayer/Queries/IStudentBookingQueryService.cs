@@ -1,4 +1,4 @@
-﻿using CalendarBooking.ApplicationLayer.Queries.DTO;
+﻿using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;

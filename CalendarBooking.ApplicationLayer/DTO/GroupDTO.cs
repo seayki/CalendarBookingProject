@@ -6,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalendarBooking.ApplicationLayer.Queries.DTO {
-    public class GroupDTO {
+namespace CalendarBooking.ApplicationLayer.DTO
+{
+    public class GroupDTO
+    {
         public int Id { get; set; }
 
         public string? Name { get; set; }

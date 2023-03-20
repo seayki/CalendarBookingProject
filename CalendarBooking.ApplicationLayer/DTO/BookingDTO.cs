@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CalendarBooking.ApplicationLayer.Queries.DTO {
-    public class BookingDTO {
+namespace CalendarBooking.ApplicationLayer.DTO
+{
+    public class BookingDTO
+    {
         public int Id { get; set; }
 
         public DateTime Time { get; set; }

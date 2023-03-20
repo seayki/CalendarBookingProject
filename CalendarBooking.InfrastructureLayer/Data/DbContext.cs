@@ -12,7 +12,7 @@ public class DBContext : DbContext
    
        
     }
-    string cns = @"Data Source=mssql8.unoeuro.com; Database=seayki_dk_db_itbutik;User ID=seayki_dk;Password=zdt3pBehgnEm; encrypt=false";
+    readonly string cns = @"Data Source=mssql8.unoeuro.com; Database=seayki_dk_db_itbutik;User ID=seayki_dk;Password=zdt3pBehgnEm; encrypt=false";
 
     public DbSet<Student> Students { get; set; }
     public DbSet<Booking> Bookings { get; set; }

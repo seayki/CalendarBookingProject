@@ -2,7 +2,6 @@
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Queries;
-using CalendarBooking.InfrastructureLayer.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
