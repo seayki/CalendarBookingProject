@@ -47,5 +47,20 @@ namespace CalendarBooking.InfrastructureLayer.DomainServices
             }
             return true;
         }
+
+        public bool IsBookingNotWithinTimeslot(Booking booking) {
+            if (booking.TimeStart >= booking.Timeslot.TimeStart && booking.TimeEnd <= booking.Timeslot.TimeEnd) {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsBookingUnderMinTimespan(Booking booking) {
+            if (booking.TimeEnd.Subtract(booking.TimeStart).TotalMinutes >= 30) {
+                return true;
+            }
+            return false;
+        }
     }
 }
+ 

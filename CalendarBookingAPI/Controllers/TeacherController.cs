@@ -6,9 +6,6 @@ namespace CalendarBooking.API.Controllers
     [ApiController]
     public class TeacherController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

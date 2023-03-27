@@ -10,15 +10,15 @@ namespace CalendarBooking.ApplicationLayer.Commands
     public interface IStudentCommandService
     {
 
-        Task<IEnumerable<Student?>> Delete(int id);
+        Task Delete(int id);
 
         Task Update(Student entity, int Id);
 
-        Task Insert(Student entity);
+        Task Create(Student entity);
 
         Task UpdateName(int id, string name);
 
-        Task<Student?> AddStudent(string firstName, string lastName);
+        Task AddStudent(string firstName, string lastName);
 
     }
 

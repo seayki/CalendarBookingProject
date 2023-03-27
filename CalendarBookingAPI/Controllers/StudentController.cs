@@ -21,6 +21,7 @@ namespace CalendarBooking.API.Controllers
             _studentQueryService = studentQueryService;
             _studentCommandService = studentCommandService;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAllStudents()
         {

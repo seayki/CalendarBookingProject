@@ -20,7 +20,13 @@ namespace CalendarBooking.InfrastructureLayer.DomainServices
 
         public bool IsTimeslotOverlapping(Timeslot timeslot)
         {
-            throw new NotImplementedException();
+            foreach (Timeslot _timeslot in timeslot.Teacher.Timeslots) {
+                if (timeslot.TimeStart >= _timeslot.TimeStart && timeslot.TimeStart <= _timeslot.TimeEnd || timeslot.TimeEnd <= _timeslot.TimeEnd && timeslot.TimeEnd >= _timeslot.TimeStart) 
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

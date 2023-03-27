@@ -12,5 +12,9 @@ namespace CalendarBooking.DomainLayer.DomainServices
         public bool IsBookingOverlapping(Booking booking);
 
         public bool IsBookingLimitReached(Booking booking);
+
+        public bool IsBookingNotWithinTimeslot(Booking booking);
+
+        public bool IsBookingUnderMinTimespan(Booking booking);
     }
 }

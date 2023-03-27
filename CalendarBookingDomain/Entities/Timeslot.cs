@@ -34,14 +34,19 @@ namespace CalendarBooking.DomainLayer.Entities
 
         private void ValidateTimeslot()
         {
-            
+            ValidateIsSetAndInFuture(nameof(TimeStart), TimeStart);
+            ValidateIsSetAndInFuture(nameof(TimeEnd), TimeEnd);
             if (_timeslotDomainService.IsTimeslotOverlapping(this))
             {
                 throw new Exception("Timeslot overlaps with one or more existing timeslots.");
             }
         }
 
-      
+        private void ValidateIsSetAndInFuture(string parameter, DateTime date) {
+            if (date == default) throw new ArgumentException($"{parameter} is not set");
+            if (date <= DateTime.Now) throw new ArgumentException($"{parameter} must be in the future");
+        }
+
 
     }
 }

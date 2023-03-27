@@ -1,4 +1,5 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.DomainLayer.DomainServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,48 +15,41 @@ namespace CalendarBooking.InfrastructureLayer.Commands
     public class BookingCommandService : IBookingCommandService
     {
         private readonly DBContext _dbcontext;
+        private readonly IBookingDomainService _domainService;
 
-        public BookingCommandService(DBContext dbcontext)
+        public BookingCommandService(DBContext dbcontext, IBookingDomainService domainService)
         {
             _dbcontext = dbcontext;
+            _domainService = domainService;
         }
 
-        public async Task<Booking?> Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var booking = _dbcontext.Bookings.Find(id);
+            _dbcontext.Bookings.Remove(booking);
         }
 
-        public async Task<Booking> Update(Booking entity, int Id)
+        public async Task Update(Booking entity, int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Booking?> CreateBooking(DateTime timeStart, DateTime timeEnd, Student student, Teacher teacher, Timeslot timeslot)
-        {
-            using var transaction = _dbcontext.Database.
-            BeginTransaction(IsolationLevel.Serializable);
-            try
+            var booking = _dbcontext.Bookings.Find(id);
+            if (booking != null) 
             {
-                var Booking = new Booking()
-                {
-                    Student = student,
-                    TimeStart = timeStart,
-                    TimeEnd = timeEnd,
-                    Teacher = teacher, 
-                    Timeslot = timeslot
-                };
-                _dbcontext.Bookings.Add(Booking);
-                _dbcontext.SaveChanges();
-                await transaction.CommitAsync();
-                return Booking;
+                booking.Teacher = entity.Teacher;
+                booking.Student = entity.Student;
+                booking.TimeStart = entity.TimeStart;
+                booking.TimeEnd = entity.TimeEnd;
+                booking.Time = entity.Time;
+                
+            }
+            
+        }
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                transaction.Rollback();
-                return null;
-            }
+        public async Task Create(Booking entity)
+        {
+            var Booking = new Booking(_domainService, entity.TimeStart, entity.TimeEnd, entity.Student) {
+
+            };
+        
         }
         
             

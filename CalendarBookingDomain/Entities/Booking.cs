@@ -47,6 +47,12 @@ namespace CalendarBooking.DomainLayer.Entities
             {
                 throw new Exception("Booking is overlapping with existing bookings");
             }
+            if (_bookingDomainService.IsBookingUnderMinTimespan(this)) {
+                throw new Exception("Booking is under minimum time length of 30 min.");
+            }
+            if (_bookingDomainService.IsBookingNotWithinTimeslot(this)) {
+                throw new Exception("Booking is not within the time limit of the timeslot");
+            }
 
 
         }

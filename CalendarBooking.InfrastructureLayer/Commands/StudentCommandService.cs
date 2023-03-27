@@ -1,4 +1,5 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.DomainLayer.DomainServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -10,27 +11,29 @@ namespace CalendarBooking.InfrastructureLayer.Commands
     {
 
         private readonly DBContext _dbcontext;
+        private readonly IStudentDomainService _studentDomainService;
 
-        public StudentCommandService(DBContext dbcontext)
+        public StudentCommandService(DBContext dbcontext, IStudentDomainService studentDomainService)
         {
             _dbcontext = dbcontext;
+            _studentDomainService = studentDomainService;
         }
 
-        public async Task<IEnumerable<Student?>> Delete(int Id)
+        public async Task Delete(int Id)
         {
             var student = _dbcontext.Students.Find(Id);
             if (student != null)
             {
                 _dbcontext.Students.Remove(student);
-                await _dbcontext.SaveChangesAsync();
+               
             }
-            return _dbcontext.Students.ToList();
+           
         }
 
 
 
 
-        public async Task<Student?> AddStudent(string firstName, string lastName)
+        public async Task AddStudent(string firstName, string lastName)
         {
             var student = new Student() { FirstName = firstName, LastName = lastName };
             _dbcontext.Students.Add(student);
@@ -38,9 +41,9 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             var result = await _dbcontext.Students.FindAsync(student.Id);
             if (result != null)
             {
-                return result;
+              
             }
-            return null;
+           
         }
 
 
@@ -58,7 +61,7 @@ namespace CalendarBooking.InfrastructureLayer.Commands
         }
 
 
-        public async Task Insert(Student entity)
+        public async Task Create(Student entity)
         {
             _dbcontext.Students.Add(entity);
             await _dbcontext.SaveChangesAsync();

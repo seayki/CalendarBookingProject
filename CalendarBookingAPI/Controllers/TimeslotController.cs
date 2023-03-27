@@ -6,9 +6,6 @@ namespace CalendarBooking.API.Controllers
     [ApiController]
     public class TimeslotController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+   
     }
 }

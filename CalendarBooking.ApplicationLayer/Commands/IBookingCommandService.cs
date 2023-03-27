@@ -9,11 +9,11 @@ namespace CalendarBooking.ApplicationLayer.Commands
 {
     public interface IBookingCommandService
     {
-        Task<Booking?> Delete(int id);
+        Task Delete(int id);
 
-        Task<Booking> Update(Booking entity, int Id);
+        Task Update(Booking entity, int id);
 
-        Task<Booking?> CreateBooking(DateTime timeStart, DateTime timeEnd, Student student, Teacher teacher, Timeslot timeSlot);
+        Task Create(Booking entity);
 
     }
 }
