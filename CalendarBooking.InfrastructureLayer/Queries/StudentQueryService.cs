@@ -14,35 +14,25 @@ namespace CalendarBooking.InfrastructureLayer.Queries
     public class StudentQueryService : IStudentQueryService 
     {
         private readonly DBContext _dbcontext;
-        private readonly IUnitOfWork<DBContext> _unitOfWork;
-
-        public StudentQueryService(IUnitOfWork<DBContext> unitOfWork) 
-        {
-            _unitOfWork = unitOfWork;
-        }
+       
         public StudentQueryService(DBContext dBContext)
         {           
             _dbcontext = dBContext;
         }
-        public  async Task<IEnumerable<Student>> GetAll()
+
+        public async Task<int> CountAsync()
         {
-            var students = await _dbcontext.Students.ToListAsync();
-            return students;
+            return await _dbcontext.Students.CountAsync();
         }
 
-        public async Task<Student?> FindById(int Id)
+        public async Task<IEnumerable<Student>> GetAllAsync()
         {
-            var student = await _dbcontext.Students.FindAsync(Id);
-            return student;
+            return await _dbcontext.Students.ToListAsync();
         }
 
-
-        public async Task<IEnumerable<Booking>?> GetBookings(int studentId)
+        public async Task<Student?> GetByIdAsync(int id)
         {
-            var studentBookings = await _dbcontext.Bookings.Where(b => b.Student.Id == studentId).ToListAsync();
-            return studentBookings;
+            return await _dbcontext.Students.FindAsync(id);
         }
-
-
     }
 }

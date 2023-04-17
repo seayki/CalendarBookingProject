@@ -1,5 +1,7 @@
 ﻿using CalendarBooking.ApplicationLayer.Queries;
+using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,21 @@ namespace CalendarBooking.InfrastructureLayer.Queries
         {
 
             _dbcontext = dBContext;
+        }
+
+        public async Task<int?> CountAsync()
+        {
+            return await _dbcontext.Bookings.CountAsync();
+        }
+
+        public async Task<IEnumerable<Booking>> GetAllAsync()
+        {
+            return await _dbcontext.Bookings.ToListAsync();
+        }
+
+        public async Task<Booking?> GetByIdAsync(int id)
+        {
+            return await _dbcontext.Bookings.FindAsync(id);
         }
     }
 }

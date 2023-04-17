@@ -1,6 +1,4 @@
-﻿
-
-using CalendarBooking.ApplicationLayer.Commands;
+﻿using CalendarBooking.ApplicationLayer.Commands;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -25,20 +23,7 @@ namespace CalendarBooking.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Student>>> GetAllStudents()
         {
-            var result = await _studentQueryService.GetAll();
-            if (result == null)
-            {
-                return BadRequest("Error Occurred");
-            }
-            return Ok(result);
-        }
-
-     
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Student>>> DeleteStudent(int id)
-        {
-            var result = await _studentCommandService.Delete(id);
+            var result = await _studentQueryService.GetAllAsync();
             if (result == null)
             {
                 return BadRequest("Error Occurred");
@@ -47,44 +32,59 @@ namespace CalendarBooking.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Student>> FindById(int id)
+        public async Task<ActionResult<Student>> GetById(int id)
         {
-            var result = await _studentQueryService.FindById(id);
+            var result = await _studentQueryService.GetByIdAsync(id);
             if (result == null)
             {
                 return BadRequest("Error Occurred");
             }
             return Ok(result);
         }
-
-  
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Student?>> Update(Student entity, int id)
-
-        {
-            await _studentCommandService.Update(entity, id);
-         
-            return Ok();
-        }
-
+   
 
         [HttpPost]
-        public async Task<ActionResult<Student>> AddStudent(string firstName, string lastName)
+        public async Task<ActionResult> Create(string firstName, string lastName)
         {
-            var result = await _studentCommandService.AddStudent(firstName, lastName);
-            if (result == null)
+            try
             {
-                return NotFound("Error Occurred");
+                await _studentCommandService.Create(firstName, lastName);
+                return Ok();
             }
-            return Ok(result);
+            catch
+            {
+                return BadRequest();
+            }
+
+        }
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await _studentCommandService.Delete(id);
+                return Ok();
+            }
+
+            catch
+            {
+                return BadRequest();
+            }
         }
 
+        [HttpPut]
+        public async Task<ActionResult> Update(Student student, int id)
+        {
+            try
+            {
+                await _studentCommandService.Update(student, id);
+                return Ok();
+            }
 
-      
-
-
+            catch
+            {
+                return BadRequest();
+            }
+        }
     }
-
-
 }

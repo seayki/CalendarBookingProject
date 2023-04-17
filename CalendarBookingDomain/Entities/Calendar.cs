@@ -5,7 +5,9 @@ namespace CalendarBooking.DomainLayer.Entities
 {
     public class Calendar : EntitySuperclass
     {
-        public Group Group { get; set; } = new Group();
+        [Required]
+        public string Title { get; set; } = string.Empty;
+        public List<Group> Group { get; set; } = new List<Group>();
         public List<Teacher> Teachers { get; set; } = new List<Teacher>();
         public List<Timeslot> Timeslots { get; set; } = new List<Timeslot>();
 
@@ -13,6 +15,13 @@ namespace CalendarBooking.DomainLayer.Entities
         {
             
         }
+
+        public Calendar(string title)
+        {
+            Title = title;
+        }
+
+     
     }
 
    

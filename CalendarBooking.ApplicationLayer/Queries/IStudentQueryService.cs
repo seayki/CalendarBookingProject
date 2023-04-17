@@ -12,10 +12,9 @@ namespace CalendarBooking.ApplicationLayer.Queries
     {
     
       
-        Task<IEnumerable<Student>> GetAll();
-        Task<Student?> FindById(int Id);
-
-        
+        Task<IEnumerable<Student>> GetAllAsync();
+        Task<Student?> GetByIdAsync(int id);
+        Task<int> CountAsync();
 
 
 

@@ -1,4 +1,6 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.ReposatoryServices;
+using CalendarBooking.ApplicationLayer.UnitOfWork;
 using CalendarBooking.DomainLayer.DomainServices;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
@@ -12,46 +14,39 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.InfrastructureLayer.Commands
 {
-    public class BookingCommandService : IBookingCommandService
+    public class BookingRepo : IBookingRepo
     {
         private readonly DBContext _dbcontext;
-        private readonly IBookingDomainService _domainService;
-
-        public BookingCommandService(DBContext dbcontext, IBookingDomainService domainService)
+        public BookingRepo(DBContext dbcontext)
         {
-            _dbcontext = dbcontext;
-            _domainService = domainService;
+            _dbcontext = dbcontext;    
         }
 
-        public async Task Delete(int id)
+        public void Create(Booking entity)
         {
-            var booking = _dbcontext.Bookings.Find(id);
-            _dbcontext.Bookings.Remove(booking);
+            _dbcontext.Bookings.Add(entity);
         }
-
-        public async Task Update(Booking entity, int id)
+        public void Delete(int id)
         {
             var booking = _dbcontext.Bookings.Find(id);
             if (booking != null) 
             {
-                booking.Teacher = entity.Teacher;
+                _dbcontext.Bookings.Remove(booking);
+            }
+        }
+
+        public void Update(Booking entity, int id)
+        {
+            var booking = _dbcontext.Bookings.Find(id);
+            if (booking != null) 
+            {
+                
                 booking.Student = entity.Student;
                 booking.TimeStart = entity.TimeStart;
                 booking.TimeEnd = entity.TimeEnd;
-                booking.Time = entity.Time;
-                
+                booking.Timeslot = entity.Timeslot;
             }
             
-        }
-
-        public async Task Create(Booking entity)
-        {
-            var Booking = new Booking(_domainService, entity.TimeStart, entity.TimeEnd, entity.Student) {
-
-            };
-        
-        }
-        
-            
+        }            
     }
 }

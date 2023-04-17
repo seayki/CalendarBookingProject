@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.ApplicationLayer.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         void CreateTransaction();
         void Commit();
         void Rollback();
         void Save();
+        void Dispose();
     }
 }

@@ -14,11 +14,8 @@ namespace CalendarBooking.ApplicationLayer.Commands
 
         Task Update(Student entity, int Id);
 
-        Task Create(Student entity);
+        Task Create(string firstName, string lastName);
 
-        Task UpdateName(int id, string name);
-
-        Task AddStudent(string firstName, string lastName);
 
     }
 

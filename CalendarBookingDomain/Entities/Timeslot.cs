@@ -17,6 +17,11 @@ namespace CalendarBooking.DomainLayer.Entities
         [Required]
         public Teacher Teacher { get; set; } = new Teacher();
 
+
+        public Timeslot()
+        {
+            
+        }
         public Timeslot(ITimeslotDomainService timeslotDomainService, DateTime timeStart, DateTime timeEnd, Teacher teacher)
         {
             _timeslotDomainService = timeslotDomainService;
@@ -24,12 +29,6 @@ namespace CalendarBooking.DomainLayer.Entities
             TimeEnd = timeEnd;
             Teacher = teacher;
             ValidateTimeslot();
-        }
-
-
-        public Timeslot()
-        {
-          
         }
 
         private void ValidateTimeslot()
