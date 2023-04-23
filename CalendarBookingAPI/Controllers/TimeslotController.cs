@@ -1,7 +1,9 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CalendarBooking.API.Controllers
 {
@@ -18,14 +20,13 @@ namespace CalendarBooking.API.Controllers
             _timeslotQueryService = timeslotQueryService;
             _timeslotCommandService = timeslotCommandService;
         }
-
         [HttpGet]
-        public async Task<ActionResult<List<Timeslot>>> GetAll()
+        public async Task<ActionResult<List<TimeslotDTO>>> GetAll()
         {
             var result = await _timeslotQueryService.GetAllAsync();
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
@@ -36,24 +37,23 @@ namespace CalendarBooking.API.Controllers
             var result = await _timeslotQueryService.GetByIdAsync(id);
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Timeslot timeslot)
+        public async Task<ActionResult> Create(DateTime timeStart, DateTime timeEnd, int teacherId, int calendarId)
         {
             try
             {
-                await _timeslotCommandService.Create(timeslot);
+                await _timeslotCommandService.Create(timeStart, timeEnd, teacherId, calendarId);
                 return Ok();
             }
-            catch
+            catch(Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
-
         }
         [HttpDelete]
         public async Task<ActionResult> Delete(int id)
@@ -64,25 +64,10 @@ namespace CalendarBooking.API.Controllers
                 return Ok();
             }
 
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> Update(Timeslot timeslot, int id)
-        {
-            try
-            {
-                await _timeslotCommandService.Update(timeslot, id);
-                return Ok();
-            }
-
-            catch
-            {
-                return BadRequest();
-            }
-        }
+        }  
     }
 }

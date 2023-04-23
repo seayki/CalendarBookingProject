@@ -1,4 +1,6 @@
-﻿using CalendarBooking.ApplicationLayer.Queries;
+﻿using AutoMapper;
+using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -13,21 +15,19 @@ namespace CalendarBooking.InfrastructureLayer.Queries
     public class BookingQueryService : IBookingQueryService
     {
         private readonly DBContext _dbcontext;
+        private readonly IMapper _mapper;
 
-        public BookingQueryService(DBContext dBContext)
+        public BookingQueryService(DBContext dBContext, IMapper mapper)
         {
 
             _dbcontext = dBContext;
+            _mapper = mapper;
         }
 
-        public async Task<int?> CountAsync()
+        public async Task<IEnumerable<BookingDTO>> GetAllAsync()
         {
-            return await _dbcontext.Bookings.CountAsync();
-        }
-
-        public async Task<IEnumerable<Booking>> GetAllAsync()
-        {
-            return await _dbcontext.Bookings.ToListAsync();
+            var bookings = _mapper.Map<IEnumerable<BookingDTO>>(await _dbcontext.Bookings.ToListAsync());
+            return bookings;
         }
 
         public async Task<Booking?> GetByIdAsync(int id)

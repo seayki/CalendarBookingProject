@@ -1,4 +1,5 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +24,12 @@ namespace CalendarBooking.API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<Booking>>> GetAllBookings()
+        public async Task<ActionResult<List<BookingDTO>>> GetAllBookings()
         {
             var result = await _bookingQueryService.GetAllAsync();
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
@@ -38,21 +39,21 @@ namespace CalendarBooking.API.Controllers
             var result = await _bookingQueryService.GetByIdAsync(id);
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
         [HttpPost]
-        public async Task<ActionResult> Create(Booking booking)
+        public async Task<ActionResult> Create(CreateBookingDTO createBookingDTO)
         {
             try
             {
-                await _bookingCommandService.Create(booking);
+                await _bookingCommandService.Create(createBookingDTO);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
 
         }
@@ -65,24 +66,24 @@ namespace CalendarBooking.API.Controllers
                 return Ok();
             }
 
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(Booking booking, int id)
+        public async Task<ActionResult> Update(DateTime dateTime, int id)
         {
             try
             {
-                await _bookingCommandService.Update(booking, id);
+                await _bookingCommandService.UpdateTimeStart(dateTime, id);
                 return Ok();
             }
 
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }

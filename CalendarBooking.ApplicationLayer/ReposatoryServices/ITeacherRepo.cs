@@ -12,8 +12,10 @@ namespace CalendarBooking.ApplicationLayer.ReposatoryServices
     {
         void Delete(int id);
 
-        void Update(Teacher entity, int id);
+        void UpdateFirstName(string firstName, int id);
 
-        void Create(Teacher entity);
+        void UpdateLastName(string lastName, int id);
+
+        void Create(Teacher teacher);
     }
 }

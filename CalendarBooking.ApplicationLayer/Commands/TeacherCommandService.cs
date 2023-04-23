@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.ReposatoryServices;
+﻿using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.ApplicationLayer.ReposatoryServices;
 using CalendarBooking.ApplicationLayer.UnitOfWork;
 using CalendarBooking.DomainLayer.Entities;
 using System;
@@ -20,14 +21,16 @@ namespace CalendarBooking.ApplicationLayer.Commands
             _unitOfWork = unitOfWork;
         }
 
-        public Task Create(Teacher entity)
+        public Task Create(CreateTeacherDTO createTeacherDTO)
         {
             try
             {
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _teacherRepo.Create(entity);
+                    User user = new User(createTeacherDTO.UserName, createTeacherDTO.Password);
+                    Teacher teacher = new Teacher(createTeacherDTO.FirstName, createTeacherDTO.LastName, user);    
+                    _teacherRepo.Create(teacher);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;
@@ -58,14 +61,33 @@ namespace CalendarBooking.ApplicationLayer.Commands
             }
         }
 
-        public Task Update(Teacher entity, int id)
+        public Task UpdateFirstName(string firstName, int id)
         {
             try
             {
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _teacherRepo.Update(entity, id);
+                    _teacherRepo.UpdateFirstName(firstName, id);
+                    _unitOfWork.Save();
+                    _unitOfWork.Commit();
+                    return Task.CompletedTask;
+                }
+            }
+            catch (Exception ex)
+            {
+                return Task.FromException(ex);
+            }
+        }
+
+        public Task UpdateLastName(string lastName, int id)
+        {
+            try
+            {
+                using (_unitOfWork)
+                {
+                    _unitOfWork.CreateTransaction();
+                    _teacherRepo.UpdateLastName(lastName, id);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;

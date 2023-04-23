@@ -1,4 +1,6 @@
-﻿using CalendarBooking.ApplicationLayer.Queries;
+﻿using AutoMapper;
+using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,26 +16,28 @@ namespace CalendarBooking.InfrastructureLayer.Queries
     {
 
         private readonly DBContext _dbcontext;
+        private readonly IMapper _mapper;
 
-        public TeacherQueryService(DBContext dBContext)
+        public TeacherQueryService(DBContext dBContext, IMapper mapper)
         {
 
             _dbcontext = dBContext;
+            _mapper = mapper;
         }
-
-        public async Task<int> CountAsync()
+        public async Task<IEnumerable<TeacherDTO>> GetAllAsync()
         {
-            return await _dbcontext.Teachers.CountAsync();
-        }
-
-        public async Task<IEnumerable<Teacher>> GetAllAsync()
-        {
-            return await _dbcontext.Teachers.ToListAsync();
+            var teachers = _mapper.Map<IEnumerable<TeacherDTO>>(await _dbcontext.Teachers.ToListAsync());
+            return teachers;
         }
 
         public async Task<Teacher?> GetByIdAsync(int id)
         {
             return await _dbcontext.Teachers.FindAsync(id);
+        }
+
+        public Teacher? GetById(int id)
+        {
+            return _dbcontext.Teachers.Find(id);
         }
     }
 }

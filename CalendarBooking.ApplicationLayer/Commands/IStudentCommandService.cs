@@ -1,4 +1,5 @@
-﻿using CalendarBooking.DomainLayer.Entities;
+﻿using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,15 @@ namespace CalendarBooking.ApplicationLayer.Commands
 {
     public interface IStudentCommandService
     {
-
+        Task Create(CreateStudentDTO createStudentDTO);
         Task Delete(int id);
 
-        Task Update(Student entity, int Id);
+        Task UpdateEmail(string email, int Id);
 
-        Task Create(string firstName, string lastName);
+        Task UpdateFirstName(string firstName, int Id);
+
+        Task UpdateLastName(string lastName, int Id);
+      
 
 
     }

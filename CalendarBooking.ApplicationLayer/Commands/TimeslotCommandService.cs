@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.ReposatoryServices;
+﻿using CalendarBooking.ApplicationLayer.Queries;
+using CalendarBooking.ApplicationLayer.ReposatoryServices;
 using CalendarBooking.ApplicationLayer.UnitOfWork;
 using CalendarBooking.DomainLayer.DomainServices;
 using CalendarBooking.DomainLayer.Entities;
@@ -15,27 +16,37 @@ namespace CalendarBooking.ApplicationLayer.Commands
         private readonly ITimeslotRepo _timeslotRepo;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ITimeslotDomainService _timeslotDomainService;
+        private readonly ITeacherQueryService _teacherQueryService;
+        private readonly ICalendarQueryService _calendarQueryService;
 
-        public TimeslotCommandService(ITimeslotRepo timeslotRepo, IUnitOfWork unitOfWork, ITimeslotDomainService timeslotDomainService)
+        public TimeslotCommandService(ITimeslotRepo timeslotRepo, IUnitOfWork unitOfWork, ITimeslotDomainService timeslotDomainService, ITeacherQueryService teacherQueryService, ICalendarQueryService calendarQueryService)
         {
             _timeslotDomainService = timeslotDomainService;
             _timeslotRepo = timeslotRepo;
             _unitOfWork = unitOfWork;
+            _teacherQueryService = teacherQueryService;
+            _calendarQueryService = calendarQueryService;
         }
 
-        public Task Create(Timeslot entity)
+        public Task Create(DateTime timeStart, DateTime timeEnd, int teacherId, int calendarId)
         {
             try
             {
-                using (_unitOfWork)
-                {
-                    _unitOfWork.CreateTransaction();
-                    Timeslot timeslot = new Timeslot(_timeslotDomainService, entity.TimeStart, entity.TimeEnd, entity.Teacher);
-                    _timeslotRepo.Create(timeslot);
-                    _unitOfWork.Save();
-                    _unitOfWork.Commit();
-                    return Task.CompletedTask;
+                Teacher? teacher =  _teacherQueryService.GetById(teacherId);
+                Calendar? calendar = _calendarQueryService.GetById(calendarId);
+                if (teacher != null && calendar != null)
+                { 
+                    using (_unitOfWork)
+                    {
+                        _unitOfWork.CreateTransaction();                    
+                        Timeslot timeslot = new Timeslot(_timeslotDomainService, timeStart, timeEnd, teacher, calendar);
+                        _timeslotRepo.Create(timeslot);
+                        _unitOfWork.Save();
+                        _unitOfWork.Commit();
+                        return Task.CompletedTask;
+                    }
                 }
+                throw new ArgumentException("Calendar or teacher could not be found.");
             }
             catch (Exception ex)
             {
@@ -62,24 +73,7 @@ namespace CalendarBooking.ApplicationLayer.Commands
             }
         }
 
-        public Task Update(Timeslot entity, int id)
-        {
-            try
-            {
-                using (_unitOfWork)
-                {
-                    _unitOfWork.CreateTransaction();
-                    _timeslotRepo.Update(entity, id);
-                    _unitOfWork.Save();
-                    _unitOfWork.Commit();
-                    return Task.CompletedTask;
-                }
-            }
-            catch (Exception ex)
-            {
-                return Task.FromException(ex);
-            }
-        }
+  
     }
 }
 

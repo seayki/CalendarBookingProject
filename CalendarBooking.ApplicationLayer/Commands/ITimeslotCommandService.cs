@@ -10,9 +10,6 @@ namespace CalendarBooking.ApplicationLayer.Commands
     public interface ITimeslotCommandService
     {
         Task Delete(int id);
-
-        Task Update(Timeslot entity, int id);
-
-        Task Create(Timeslot entity);
+        Task Create(DateTime timeStart, DateTime timeEnd, int teacherId, int calendarId);
     }
 }

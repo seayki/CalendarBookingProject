@@ -12,8 +12,8 @@ namespace CalendarBooking.ApplicationLayer.ReposatoryServices
     {
         void Delete(int id);
 
-        void Update(Group entity, int id);
+        void Update(string name, int id);
 
-        void Create(Group entity);
+        void Create(string name);
     }
 }

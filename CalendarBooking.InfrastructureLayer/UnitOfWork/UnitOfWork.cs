@@ -8,6 +8,7 @@ using CalendarBooking.InfrastructureLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
+using Microsoft.Identity.Client;
 
 namespace CalendarBooking.InfrastructureLayer.UnitOfWork
 {
@@ -15,7 +16,6 @@ namespace CalendarBooking.InfrastructureLayer.UnitOfWork
     {
         private DBContext _context { get; set; }
         private bool _disposed;
-        private string errors = string.Empty;
         public UnitOfWork(DBContext context)
         {
             _context = context;
@@ -55,11 +55,10 @@ namespace CalendarBooking.InfrastructureLayer.UnitOfWork
             {
                 _context.SaveChanges();
             }
-            catch (DBConcurrencyException dbEx)
+            catch (DBConcurrencyException ex)
             {
                 Rollback();
-              
-
+                throw new Exception("Unable to save due to concurrency conflict");
             }
 
         }

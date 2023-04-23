@@ -12,8 +12,6 @@ namespace CalendarBooking.ApplicationLayer.ReposatoryServices
     {
         void Delete(int id);
 
-        void Update(Timeslot entity, int id);
-
-        void Create(Timeslot entity);
+        void Create(Timeslot timeslot);
     }
 }

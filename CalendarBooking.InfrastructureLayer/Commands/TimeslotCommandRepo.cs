@@ -36,16 +36,5 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             }
 
         }
-
-        public void Update(Timeslot entity, int Id)
-        {
-            var timeslot = _dbcontext.Timeslots.Find(Id);
-
-            if (timeslot != null)
-            {
-                timeslot.TimeStart = entity.TimeStart;
-                timeslot.TimeEnd = entity.TimeEnd;
-            }
-        }
     }
 }

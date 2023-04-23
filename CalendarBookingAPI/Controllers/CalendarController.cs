@@ -1,4 +1,5 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,12 @@ namespace CalendarBooking.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Calendar>>> GetAllCalendars()
+        public async Task<ActionResult<List<CalendarDTO>>> GetAllCalendars()
         {
             var result = await _calendarQueryService.GetAllAsync();
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
@@ -35,7 +36,7 @@ namespace CalendarBooking.API.Controllers
             var result = await _calendarQueryService.GetByIdAsync(id);
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
@@ -48,9 +49,9 @@ namespace CalendarBooking.API.Controllers
                 await _calendarCommandService.Create(calendarName);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
@@ -62,9 +63,9 @@ namespace CalendarBooking.API.Controllers
                 await _calendarCommandService.Delete(id);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
@@ -76,9 +77,9 @@ namespace CalendarBooking.API.Controllers
                 await _calendarCommandService.Update(calendarName, id);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }

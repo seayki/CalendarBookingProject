@@ -1,4 +1,5 @@
-﻿using CalendarBooking.DomainLayer.Entities;
+﻿using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace CalendarBooking.ApplicationLayer.Queries
 {
     public interface IBookingQueryService
     {
-        Task<IEnumerable<Booking>> GetAllAsync();
+        Task<IEnumerable<BookingDTO>> GetAllAsync();
         Task<Booking?> GetByIdAsync(int id);
-        Task<int?> CountAsync();
+   
     }
 }

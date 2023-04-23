@@ -1,4 +1,5 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -21,18 +22,16 @@ namespace CalendarBooking.API.Controllers
             _groupCommandService = groupCommandService;
         }
 
-
         [HttpGet]
-        public async Task<ActionResult<List<Group>>> GetAllGroups()
+        public async Task<ActionResult<List<GroupDTO>>> GetAllGroups()
         {
             var result = await _groupQueryService.GetAllAsync();
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
-
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Group>> GetById(int id)
@@ -40,23 +39,22 @@ namespace CalendarBooking.API.Controllers
             var result = await _groupQueryService.GetByIdAsync(id);
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
 
-
-        [HttpPost]
-        public async Task<ActionResult> Create(Group group)
+        [HttpPost("{name}")]
+        public async Task<ActionResult> Create(string name)
         {
             try
             {
-                await _groupCommandService.Create(group);
+                await _groupCommandService.Create(name);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
 
         }
@@ -69,23 +67,23 @@ namespace CalendarBooking.API.Controllers
                 await _groupCommandService.Delete(id);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(Group group, int id)
+        public async Task<ActionResult> Update(string name, int id)
         {
             try
             {
-                await _groupCommandService.Update(group, id);
+                await _groupCommandService.Update(name, id);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
     }

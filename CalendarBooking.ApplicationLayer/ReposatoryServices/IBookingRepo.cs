@@ -12,7 +12,7 @@ namespace CalendarBooking.ApplicationLayer.ReposatoryServices
     {
         void Delete(int id);
 
-        void Update(Booking entity, int id);
+        Booking UpdateTimeStart(DateTime timeStart, int id);
 
         void Create(Booking entity);
     }

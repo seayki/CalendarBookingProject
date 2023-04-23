@@ -20,15 +20,9 @@ namespace CalendarBooking.InfrastructureLayer.Commands
         
         }
 
-
-
-        public void Create(string firstName, string lastName)
+        public void Create(Student student)
         {
-            var student = new Student(firstName, lastName);
-            if (student != null)
-            {
-                _dbcontext.Students.Add(student);
-            }
+            _dbcontext.Students.Add(student);
         }
         public void Delete(int Id)
         {
@@ -36,22 +30,41 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             if (student != null)
             {
                 _dbcontext.Students.Remove(student);
-               
             }
-           
         }
 
-        public void Update(Student entity, int Id)
+        public void UpdateEmail(string email, int Id)
         {
             var student = _dbcontext.Students.Find(Id);
 
             if (student != null)
             {
-                student.FirstName = entity.FirstName;
-                student.LastName = entity.LastName;
+                student.Email = email;
             }
         }
-        
+
+        public void UpdateFirstName(string firstName, int Id)
+        {
+            var student = _dbcontext.Students.Find(Id);
+
+            if (student != null)
+            {
+                student.FirstName = firstName;  
+            }
+        }
+
+        public void UpdateLastName(string lastName, int Id)
+        {
+            var student = _dbcontext.Students.Find(Id);
+
+            if (student != null)
+            {
+                student.LastName = lastName;
+            }
+        }
+
+
+
     }
 }
 

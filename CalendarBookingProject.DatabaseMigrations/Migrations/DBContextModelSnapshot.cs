@@ -17,7 +17,7 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -127,6 +127,9 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -134,6 +137,8 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                         .HasColumnType("rowversion");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Students");
                 });
@@ -154,6 +159,9 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("Version")
                         .IsConcurrencyToken()
                         .IsRequired()
@@ -161,6 +169,8 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                         .HasColumnType("rowversion");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Teachers");
                 });
@@ -182,9 +192,6 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                     b.Property<DateTime>("TimeEnd")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TimeSlotLength")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("TimeStart")
                         .HasColumnType("datetime2");
 
@@ -201,6 +208,36 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Timeslots");
+                });
+
+            modelBuilder.Entity("CalendarBooking.DomainLayer.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CalendarGroup", b =>
@@ -269,6 +306,28 @@ namespace CalendarBookingProject.DatabaseMigrations.Migrations
                     b.Navigation("Student");
 
                     b.Navigation("Timeslot");
+                });
+
+            modelBuilder.Entity("CalendarBooking.DomainLayer.Entities.Student", b =>
+                {
+                    b.HasOne("CalendarBooking.DomainLayer.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CalendarBooking.DomainLayer.Entities.Teacher", b =>
+                {
+                    b.HasOne("CalendarBooking.DomainLayer.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CalendarBooking.DomainLayer.Entities.Timeslot", b =>

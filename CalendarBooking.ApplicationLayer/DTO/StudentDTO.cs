@@ -8,13 +8,8 @@ namespace CalendarBooking.ApplicationLayer.DTO
 {
     public class StudentDTO
     {
-        public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
         public string? Email { get; set; }
-
-        public List<BookingDTO> Bookings { get; set; } = new();
-
     }
 }

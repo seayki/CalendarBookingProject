@@ -35,17 +35,15 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             }
         }
 
-        public void Update(Booking entity, int id)
+        public Booking UpdateTimeStart(DateTime dateTime, int id)
         {
             var booking = _dbcontext.Bookings.Find(id);
             if (booking != null) 
             {
-                
-                booking.Student = entity.Student;
-                booking.TimeStart = entity.TimeStart;
-                booking.TimeEnd = entity.TimeEnd;
-                booking.Timeslot = entity.Timeslot;
+                booking.TimeStart = dateTime;
+                return booking;
             }
+            throw new ArgumentException("Booking not found");
             
         }            
     }

@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.ReposatoryServices;
+﻿using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.ApplicationLayer.ReposatoryServices;
 using CalendarBooking.ApplicationLayer.UnitOfWork;
 using CalendarBooking.DomainLayer.Entities;
 using System;
@@ -13,25 +14,21 @@ namespace CalendarBooking.ApplicationLayer.Commands
     {
         private readonly IStudentRepo _studentRepo;
         private readonly IUnitOfWork _unitOfWork;
-
-
         public StudentCommandService(IStudentRepo studentRepo, IUnitOfWork unitOfWork)
         {
             _studentRepo = studentRepo;
             _unitOfWork = unitOfWork;
-
         }
-        public Task Create(string firstName, string lastName)
+        public Task Create(CreateStudentDTO createStudentDTO)
         {
-
             try
             {
-
-
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _studentRepo.Create(firstName, lastName);
+                    User user = new User(createStudentDTO.UserName, createStudentDTO.Password);
+                    Student student = new Student(createStudentDTO.FirstName, createStudentDTO.LastName, user);
+                    _studentRepo.Create(student);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;
@@ -61,7 +58,7 @@ namespace CalendarBooking.ApplicationLayer.Commands
                 return Task.FromException(ex);
             }
         }
-        public Task Update(Student entity, int id)
+        public Task UpdateEmail(string email, int id)
         {
 
             try
@@ -69,7 +66,47 @@ namespace CalendarBooking.ApplicationLayer.Commands
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _studentRepo.Update(entity, id);
+                    _studentRepo.UpdateEmail(email, id);
+                    _unitOfWork.Save();
+                    _unitOfWork.Commit();
+                    return Task.CompletedTask;
+                }
+            }
+            catch (Exception ex)
+            {
+                return Task.FromException(ex);
+            }
+        }
+
+        public Task UpdateFirstName(string firstName, int id)
+        {
+
+            try
+            {
+                using (_unitOfWork)
+                {
+                    _unitOfWork.CreateTransaction();
+                    _studentRepo.UpdateFirstName(firstName, id);
+                    _unitOfWork.Save();
+                    _unitOfWork.Commit();
+                    return Task.CompletedTask;
+                }
+            }
+            catch (Exception ex)
+            {
+                return Task.FromException(ex);
+            }
+        }
+
+        public Task UpdateLastName(string lastName, int id)
+        {
+
+            try
+            {
+                using (_unitOfWork)
+                {
+                    _unitOfWork.CreateTransaction();
+                    _studentRepo.UpdateLastName(lastName, id);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;

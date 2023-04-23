@@ -11,8 +11,8 @@ namespace CalendarBooking.ApplicationLayer.Commands
     {
         Task Delete(int id);
 
-        Task Update(Group entity, int id);
+        Task Update(string name, int id);
 
-        Task Create(Group entity);
+        Task Create(string name);
     }
 }

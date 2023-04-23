@@ -21,9 +21,9 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             _dbcontext = dbcontext;
         }
 
-        public void Create(Group entity)
+        public void Create(string name)
         {
-            var group = new Group(entity.Name);
+            var group = new Group(name);
             if (group != null)
             {
                 _dbcontext.Groups.Add(group);
@@ -39,14 +39,12 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             }
         }
 
-        public void Update(Group entity, int id)
+        public void Update(string name, int id)
         {
             var group = _dbcontext.Groups.Find(id);
             if (group != null)
             {
-                group.Name = entity.Name;
-                group.Students = entity.Students;
-                group.Calendars = entity.Calendars;
+                group.Name = name;
             }
         }
     }

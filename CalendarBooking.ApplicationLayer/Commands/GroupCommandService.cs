@@ -21,7 +21,7 @@ namespace CalendarBooking.ApplicationLayer.Commands
             _unitOfWork = unitOfWork;
 
         }
-        public Task Create(Group entity)
+        public Task Create(string name)
         {
 
             try
@@ -29,7 +29,7 @@ namespace CalendarBooking.ApplicationLayer.Commands
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _groupRepo.Create(entity);
+                    _groupRepo.Create(name);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;
@@ -59,14 +59,14 @@ namespace CalendarBooking.ApplicationLayer.Commands
                 return Task.FromException(ex);
             }
         }
-        public Task Update(Group entity, int id)
+        public Task Update(string name, int id)
         {
             try
             {
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _groupRepo.Update(entity, id);
+                    _groupRepo.Update(name, id);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;

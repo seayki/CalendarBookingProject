@@ -33,6 +33,11 @@ namespace CalendarBooking.DomainLayer.Entities
             Timeslot = timeslot;
             ValidateBooking();
         }
+
+        public void Validate() 
+        {
+            ValidateBooking();
+        }
         private void ValidateBooking()
         {
             ValidateIsSetAndInFuture(nameof(TimeStart), TimeStart);
@@ -51,8 +56,6 @@ namespace CalendarBooking.DomainLayer.Entities
             if (_bookingDomainService.IsBookingNotWithinTimeslot(this)) {
                 throw new Exception("Booking is not within the time limit of the timeslot");
             }
-
-
         }
         private void ValidateIsSetAndInFuture(string parameter, DateTime date)
         {

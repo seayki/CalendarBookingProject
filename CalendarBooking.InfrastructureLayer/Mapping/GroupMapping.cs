@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using CalendarBooking.ApplicationLayer.DTO;
-using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace CalendarBooking.InfrastructureLayer.Mapping
 {
-    public class StudentBooking : Profile
+    public class GroupMapping : Profile
     {
-        public StudentBooking() 
+        public GroupMapping()
         {
-            CreateMap<Student, StudentDTO>().MaxDepth(2);
-            CreateMap<Booking, BookingDTO>().PreserveReferences();
+            CreateMap<Group, GroupDTO>().MaxDepth(2);
         }
     }
 }

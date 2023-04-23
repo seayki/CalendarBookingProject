@@ -20,7 +20,7 @@ public class DBContext : DbContext
     public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Timeslot> Timeslots { get; set; }
     public DbSet<Calendar> Calendars { get; set; }
-
+    public DbSet<User> Users { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         

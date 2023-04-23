@@ -1,4 +1,5 @@
 ﻿using CalendarBooking.ApplicationLayer.Commands;
+using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,12 @@ namespace CalendarBooking.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Student>>> GetAllStudents()
+        public async Task<ActionResult<List<StudentDTO>>> GetAllStudents()
         {
             var result = await _studentQueryService.GetAllAsync();
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
@@ -37,26 +38,27 @@ namespace CalendarBooking.API.Controllers
             var result = await _studentQueryService.GetByIdAsync(id);
             if (result == null)
             {
-                return BadRequest("Error Occurred");
+                return NotFound("Error Occurred");
             }
             return Ok(result);
         }
-   
+
 
         [HttpPost]
-        public async Task<ActionResult> Create(string firstName, string lastName)
+        public async Task<ActionResult> Create(CreateStudentDTO createStudentDTO)
         {
             try
             {
-                await _studentCommandService.Create(firstName, lastName);
+                await _studentCommandService.Create(createStudentDTO);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
-
         }
+
+
         [HttpDelete]
         public async Task<ActionResult> Delete(int id)
         {
@@ -65,26 +67,55 @@ namespace CalendarBooking.API.Controllers
                 await _studentCommandService.Delete(id);
                 return Ok();
             }
-
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Update(Student student, int id)
+        [HttpPut("UpdateEmail{email}")]
+        public async Task<ActionResult> UpdateEmail(string email, int id)
         {
             try
             {
-                await _studentCommandService.Update(student, id);
+                await _studentCommandService.UpdateEmail(email, id);
                 return Ok();
             }
-
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
+
+        [HttpPut("UpdateFirstName{firstName}")]
+        public async Task<ActionResult> UpdateFirstName(string firstName, int id)
+        {
+            try
+            {
+                await _studentCommandService.UpdateFirstName(firstName, id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut("UpdateLastName{lastName}")]
+        public async Task<ActionResult> UpdateLastName(string lastName, int id)
+        {
+            try
+            {
+                await _studentCommandService.UpdateLastName(lastName, id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

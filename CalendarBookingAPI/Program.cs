@@ -20,11 +20,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Angiver den implementation min service skal bruge.
-
-// Custom queries og commands
-
-
 // Default queries og commands
 builder.Services.AddScoped<IStudentQueryService, StudentQueryService>();
 builder.Services.AddScoped<IStudentCommandService, StudentCommandService>();
@@ -38,6 +33,8 @@ builder.Services.AddScoped<IBookingQueryService, BookingQueryService>();
 builder.Services.AddScoped<IBookingCommandService, BookingCommandService>();
 builder.Services.AddScoped<ITeacherQueryService, TeacherQueryService>();
 builder.Services.AddScoped<ITeacherCommandService, TeacherCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 
 // Repos
 builder.Services.AddScoped<IStudentRepo, StudentRepo>();
@@ -46,6 +43,7 @@ builder.Services.AddScoped<ICalendarRepo, CalendarRepo>();
 builder.Services.AddScoped<ITimeslotRepo, TimeslotRepo>();
 builder.Services.AddScoped<IGroupRepo, GroupRepo>();
 builder.Services.AddScoped<IBookingRepo, BookingRepo>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 // UnitOfWork
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -54,14 +52,19 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBookingDomainService, BookingDomainService>();
 builder.Services.AddScoped<ITimeslotDomainService, TimeslotDomainService>();
 
-
-
-
+// Database Context
 builder.Services.AddDbContext<DBContext>(
     options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CalendarBookingProjectDatabase"),
             db => db.MigrationsAssembly("CalendarBookingProject.DatabaseMigrations"))) ;
-//builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(StudentBookingQuery)));
+
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(StudentQueryService)));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(CalendarQueryService)));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(TeacherQueryService)));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(GroupQueryService)));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(BookingQueryService)));
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(TimeslotQueryService)));
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
