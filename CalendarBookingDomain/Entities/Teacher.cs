@@ -13,7 +13,7 @@ namespace CalendarBooking.DomainLayer.Entities
         public List<Timeslot> Timeslots { get; set; } = new List<Timeslot>();
         public List<Calendar> Calendars { get; set; } = new List<Calendar>();
         public List<Booking> Bookings { get; set; } = new List<Booking>();
-        public User User { get; set; } = new();
+        public User User { get; set; } = new User();
 
         public Teacher()
         {
@@ -22,9 +22,9 @@ namespace CalendarBooking.DomainLayer.Entities
 
         public Teacher(string firstName, string lastName, User user)
         {
-            Validate();
             FirstName = firstName;
             LastName = lastName;
+            Validate();       
             User = user;
         }
 

@@ -42,6 +42,8 @@ namespace CalendarBooking.DomainLayer.Entities
         {
             ValidateIsSetAndInFuture(nameof(TimeStart), TimeStart);
             ValidateIsSetAndInFuture(nameof(TimeEnd), TimeEnd);
+            IsBookingUnderMinTimespan(this);
+            IsBookingWithinTimeslot(this);
             if (_bookingDomainService.IsBookingLimitReached(this))
             {
                 throw new Exception("You can only have two active bookings");
@@ -50,17 +52,26 @@ namespace CalendarBooking.DomainLayer.Entities
             {
                 throw new Exception("Booking is overlapping with existing bookings");
             }
-            if (_bookingDomainService.IsBookingUnderMinTimespan(this)) {
-                throw new Exception("Booking is under minimum time length of 30 min.");
-            }
-            if (_bookingDomainService.IsBookingNotWithinTimeslot(this)) {
-                throw new Exception("Booking is not within the time limit of the timeslot");
-            }
         }
         private void ValidateIsSetAndInFuture(string parameter, DateTime date)
         {
             if (date == default) throw new ArgumentException($"{parameter} is not set");
             if (date <= DateTime.Now) throw new ArgumentException($"{parameter} must be in the future");
+
+        }
+        private void IsBookingUnderMinTimespan(Booking booking)
+        {
+            if (booking.TimeEnd.Subtract(booking.TimeStart).TotalMinutes < 30)
+            {
+                throw new Exception("Booking is under minimum time length of 30 min.");
+            }          
+        }
+        private void IsBookingWithinTimeslot(Booking booking)
+        {
+            if (booking.TimeStart < booking.Timeslot.TimeStart || booking.TimeEnd > booking.Timeslot.TimeEnd)
+            {
+                throw new Exception("Booking is not within the time limit of the timeslot");             
+            }          
         }
     }
 }

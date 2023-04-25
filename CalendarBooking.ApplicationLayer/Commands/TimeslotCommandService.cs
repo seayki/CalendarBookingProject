@@ -1,4 +1,5 @@
-﻿using CalendarBooking.ApplicationLayer.Queries;
+﻿using CalendarBooking.ApplicationLayer.DTO;
+using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.ApplicationLayer.ReposatoryServices;
 using CalendarBooking.ApplicationLayer.UnitOfWork;
 using CalendarBooking.DomainLayer.DomainServices;
@@ -28,18 +29,18 @@ namespace CalendarBooking.ApplicationLayer.Commands
             _calendarQueryService = calendarQueryService;
         }
 
-        public Task Create(DateTime timeStart, DateTime timeEnd, int teacherId, int calendarId)
+        public Task Create(CreateTimeslotDTO createTimeslotDTO)
         {
             try
             {
-                Teacher? teacher =  _teacherQueryService.GetById(teacherId);
-                Calendar? calendar = _calendarQueryService.GetById(calendarId);
+                Teacher? teacher =  _teacherQueryService.GetById(createTimeslotDTO.teacherId);
+                Calendar? calendar = _calendarQueryService.GetById(createTimeslotDTO.calendarId);
                 if (teacher != null && calendar != null)
                 { 
                     using (_unitOfWork)
                     {
                         _unitOfWork.CreateTransaction();                    
-                        Timeslot timeslot = new Timeslot(_timeslotDomainService, timeStart, timeEnd, teacher, calendar);
+                        Timeslot timeslot = new Timeslot(_timeslotDomainService, createTimeslotDTO.timeStart, createTimeslotDTO.timeEnd, teacher, calendar);
                         _timeslotRepo.Create(timeslot);
                         _unitOfWork.Save();
                         _unitOfWork.Commit();

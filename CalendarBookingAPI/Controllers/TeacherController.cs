@@ -2,7 +2,9 @@
 using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace CalendarBooking.API.Controllers
 {
@@ -42,7 +44,7 @@ namespace CalendarBooking.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost/*, Authorize(Roles = "Admin")*/]
         public async Task<ActionResult> Create(CreateTeacherDTO createTeacherDTO)
         {
             try

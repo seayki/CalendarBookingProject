@@ -23,13 +23,13 @@ namespace CalendarBooking.ApplicationLayer.Commands
         }
         public Task Create(string name)
         {
-
             try
             {
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    _groupRepo.Create(name);
+                    var group = new Group(name);
+                    _groupRepo.Create(group);
                     _unitOfWork.Save();
                     _unitOfWork.Commit();
                     return Task.CompletedTask;
@@ -44,7 +44,6 @@ namespace CalendarBooking.ApplicationLayer.Commands
         {
             try
             {
-
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();

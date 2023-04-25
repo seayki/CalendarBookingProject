@@ -33,12 +33,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBookingProject.Data
 		{FC0CB320-EC91-4191-969A-FA6B44BD9D00} = {FC0CB320-EC91-4191-969A-FA6B44BD9D00}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalendarBooking.Web", "CalendarBooking.AppWeb\CalendarBooking.Web.csproj", "{0E97A6D6-3BAE-44AB-B2CC-4CCC6A08EBE7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B6BE5742-CE15-4EA6-BB60-D6AA3983D329} = {B6BE5742-CE15-4EA6-BB60-D6AA3983D329}
-		{E3758186-4348-4E83-B57C-EB06700390FA} = {E3758186-4348-4E83-B57C-EB06700390FA}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,10 +67,6 @@ Global
 		{AB8FFEE1-1442-4EC6-98D2-AA35EE4101CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8FFEE1-1442-4EC6-98D2-AA35EE4101CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB8FFEE1-1442-4EC6-98D2-AA35EE4101CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E97A6D6-3BAE-44AB-B2CC-4CCC6A08EBE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E97A6D6-3BAE-44AB-B2CC-4CCC6A08EBE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E97A6D6-3BAE-44AB-B2CC-4CCC6A08EBE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E97A6D6-3BAE-44AB-B2CC-4CCC6A08EBE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

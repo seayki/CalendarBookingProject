@@ -1,6 +1,7 @@
 ﻿using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.ReposatoryServices;
 using CalendarBooking.ApplicationLayer.UnitOfWork;
+using CalendarBooking.DomainLayer.DomainServices;
 using CalendarBooking.DomainLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace CalendarBooking.ApplicationLayer.Commands
     {
         private readonly ITeacherRepo _teacherRepo;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserDomainService _userDomainService;
 
-        public TeacherCommandService(ITeacherRepo teacherRepo, IUnitOfWork unitOfWork)
+        public TeacherCommandService(ITeacherRepo teacherRepo, IUnitOfWork unitOfWork, IUserDomainService userDomainService)
         {
             _teacherRepo = teacherRepo;
             _unitOfWork = unitOfWork;
+            _userDomainService = userDomainService;
         }
 
         public Task Create(CreateTeacherDTO createTeacherDTO)
@@ -28,7 +31,7 @@ namespace CalendarBooking.ApplicationLayer.Commands
                 using (_unitOfWork)
                 {
                     _unitOfWork.CreateTransaction();
-                    User user = new User(createTeacherDTO.UserName, createTeacherDTO.Password);
+                    User user = new User(createTeacherDTO.UserName, createTeacherDTO.Password, _userDomainService);
                     Teacher teacher = new Teacher(createTeacherDTO.FirstName, createTeacherDTO.LastName, user);    
                     _teacherRepo.Create(teacher);
                     _unitOfWork.Save();

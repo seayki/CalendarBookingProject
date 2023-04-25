@@ -2,6 +2,8 @@
 using CalendarBooking.ApplicationLayer.DTO;
 using CalendarBooking.ApplicationLayer.Queries;
 using CalendarBooking.DomainLayer.Entities;
+using CalendarBooking.InfrastructureLayer.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,7 +30,7 @@ namespace CalendarBooking.API.Controllers
         }
 
 
-        [HttpPost("Register")]
+        [HttpPost("Register"), Authorize(Roles = "Admin")]
         public async Task<ActionResult> Register(UserDTO request)
         {
             try
@@ -42,8 +44,7 @@ namespace CalendarBooking.API.Controllers
             }
         }
 
-
-        [HttpPost("Login")]
+        [HttpPost("Login"), AllowAnonymous]
         public async Task<ActionResult<User>> Login(UserDTO request)
         {
             var result = await _userQueryService.GetByUsername(request.Username);
@@ -72,11 +73,13 @@ namespace CalendarBooking.API.Controllers
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds 
+                signingCredentials: creds
                 );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
         }
+
+        
     }
 }
                

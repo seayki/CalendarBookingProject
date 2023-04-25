@@ -21,15 +21,9 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             _dbcontext = dbcontext;
         }
 
-        public void Create(string name) {
-            var calendar = new Calendar(name)
-            {
-
-            };
-            if (calendar != null)
-            {
-                _dbcontext.Calendars.Add(calendar);
-            }
+        public void Create(Calendar calendar)
+        {                
+            _dbcontext.Calendars.Add(calendar);      
         }
 
         public void Delete(int id) {

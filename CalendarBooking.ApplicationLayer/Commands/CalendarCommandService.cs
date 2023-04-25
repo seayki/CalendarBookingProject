@@ -32,7 +32,8 @@ namespace CalendarBooking.ApplicationLayer.Commands
             using (_unitOfWork)
             {
                 _unitOfWork.CreateTransaction();
-                _calendarRepo.Create(name);
+                var calendar = new Calendar(name);
+                _calendarRepo.Create(calendar);
                 _unitOfWork.Save();
                 _unitOfWork.Commit();
                 return Task.CompletedTask;

@@ -26,9 +26,9 @@ namespace CalendarBooking.DomainLayer.Entities
 
         public Student(string firstName, string lastName, User user)
         {
-            Validate();
             FirstName = firstName;
-            LastName = lastName;   
+            LastName = lastName;
+            Validate();    
             User = user;
         }
 

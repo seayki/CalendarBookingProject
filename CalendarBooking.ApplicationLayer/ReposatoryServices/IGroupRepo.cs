@@ -14,6 +14,6 @@ namespace CalendarBooking.ApplicationLayer.ReposatoryServices
 
         void Update(string name, int id);
 
-        void Create(string name);
+        void Create(Group group);
     }
 }

@@ -21,13 +21,9 @@ namespace CalendarBooking.InfrastructureLayer.Commands
             _dbcontext = dbcontext;
         }
 
-        public void Create(string name)
+        public void Create(Group group)
         {
-            var group = new Group(name);
-            if (group != null)
-            {
-                _dbcontext.Groups.Add(group);
-            }
+            _dbcontext.Groups.Add(group);        
         }
 
         public void Delete(int id)

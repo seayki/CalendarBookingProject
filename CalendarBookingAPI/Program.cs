@@ -14,11 +14,27 @@ using CalendarBooking.ApplicationLayer.UnitOfWork;
 using CalendarBooking.InfrastructureLayer.DomainServices;
 using CalendarBooking.DomainLayer.DomainServices;
 using CalendarBooking.InfrastructureLayer.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(
+    //options =>
+    //{
+    //options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    //{
+    //    In = ParameterLocation.Header,
+    //    Name = "Authorization",
+    //    Type = SecuritySchemeType.ApiKey
+    //});
+    //options.OperationFilter<SecurityRequirementsOperationFilter>();
+    //}
+    );
+//builder.Services.AddAuthentication().AddJwtBearer();
 
 // Default queries og commands
 builder.Services.AddScoped<IStudentQueryService, StudentQueryService>();
@@ -51,6 +67,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Domain Services
 builder.Services.AddScoped<IBookingDomainService, BookingDomainService>();
 builder.Services.AddScoped<ITimeslotDomainService, TimeslotDomainService>();
+builder.Services.AddScoped<IUserDomainService, UserDomainService>();
 
 // Database Context
 builder.Services.AddDbContext<DBContext>(

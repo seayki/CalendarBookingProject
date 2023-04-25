@@ -43,11 +43,11 @@ namespace CalendarBooking.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(DateTime timeStart, DateTime timeEnd, int teacherId, int calendarId)
+        public async Task<ActionResult> Create(CreateTimeslotDTO createTimeslotDTO)
         {
             try
             {
-                await _timeslotCommandService.Create(timeStart, timeEnd, teacherId, calendarId);
+                await _timeslotCommandService.Create(createTimeslotDTO);
                 return Ok();
             }
             catch(Exception ex)
